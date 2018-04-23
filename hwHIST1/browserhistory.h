@@ -21,6 +21,8 @@ class BrowserHistory
 		void go_to_url(string url);
 
 		// Moves back (into the past) by one url.
+		// 
+		// If there is no past url to move to, does nothing.
 		void back();
 
 		// Returns whether there is a url in the past,
@@ -32,6 +34,8 @@ class BrowserHistory
 		int past_url_count();
 
 		// Moves forward (into the future) by one url.
+		// 
+		// If there is no future url to move to, does nothing.
 		void forward();
 
 		// Returns whether there is a url in future,

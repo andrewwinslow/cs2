@@ -2,6 +2,10 @@
 #ifndef REPEATS_H
 #define REPEATS_H
 
+#include <string>
+
+using namespace std;
+
 // Removes all but the first occurrence of each character in the string.
 // For instance:
 // "abcda" becomes "abcd" (2nd occurrence of 'a' removed)

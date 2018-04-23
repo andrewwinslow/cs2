@@ -12,9 +12,9 @@ using namespace std;
 class Canvas
 {
 	public:
-		// Allocates a canvas of the given width and height
-		// consisting of ' ' chars.
-		Canvas(int width, int height);
+		// Allocates a canvas of the given width and height 5 that
+		// consists entirely of ' ' (space) chars.
+		Canvas(int width);
 
 		// Allocates a canvas with width 5 and height 5 that looks like:
 		//
@@ -47,11 +47,8 @@ class Canvas
 		// Returns the width of the canvas.
 		int width();
 
-		// Returns the height of the canvas.
-		int height(); 
-
 		// Returns the entire canvas as a single string, consisting of each row
-		// of the canvas, followed by endl.
+		// of the canvas, followed by the newline character ('\n').
 		string to_string(); 
 		
 		// Replaces every instance in the canvas of old_char with new_char.
@@ -65,24 +62,9 @@ class Canvas
 		//
 		void replace(char old_char, char new_char);
 
-		// Returns a new canvas twice the width and height, where each pixel 
-		// in the old canvas corresponds to a 2x2 region of pixels in the new canvas. 
-		// 
-		// For instance:
-		//
-		//  ###              ######
-		// #   #             ######
-		// #####  becomes  ##      ##
-		// #   #           ##      ##
-		// #   #           ##########
-		//                 ##########
-		//                 ##      ##
-		//                 ##      ##
-		//                 ##      ##
-		//                 ##      ##
-		//
-		void embiggen();
-		
+		// Adds a character to the Canvas's sequence of characters.
+		void add(char x);
+
 		// Destructor. Deallocates all of the memory allocated by the canvas.
 		~Canvas();
 
@@ -92,7 +74,6 @@ class Canvas
 		// Each subarray corresponds to a column of the image.
 		char** C;
 		int _width;
-		int _height;
 };
 
 #endif

@@ -3,11 +3,9 @@
 #include <fstream>
 #include <cassert>
 #include <string>
-#include <chrono>
 #include "autocompleter.h"
 
 using namespace std;
-using namespace chrono;
 
 inline void _test(const char* expression, const char* file, int line)
 {
@@ -33,11 +31,11 @@ void interactive_mode()
 
 	// Fill autocompleter with words
 	ifstream f;
-	f.open("words_10000.txt", ios::in);
+	f.open("words.txt");
 	assert(f.is_open()); // If this fails, you're missing above file
 	string line;
 	while (getline(f, line))
-		dictionary.add(line);
+		dictionary.insert(line);
 	f.close();
 
 	string results[5];
@@ -70,21 +68,21 @@ int main()
 	Autocompleter animals;
 	test(animals.size() == 0);
 
-	animals.add("aardvark");
-	animals.add("albatross");
-	animals.add("alpaca");
-	animals.add("armadillo");
-	animals.add("camel");
-	animals.add("cat");
-	animals.add("crocodile");
-	animals.add("crow");
-	animals.add("giraffe");
-	animals.add("goat");
-	animals.add("goose");
-	animals.add("gorilla");
+	animals.insert("aardvark");
+	animals.insert("albatross");
+	animals.insert("alpaca");
+	animals.insert("armadillo");
+	animals.insert("camel");
+	animals.insert("cat");
+	animals.insert("crocodile");
+	animals.insert("crow");
+	animals.insert("giraffe");
+	animals.insert("goat");
+	animals.insert("goose");
+	animals.insert("gorilla");
 	test(animals.size() == 12);
 
-	animals.add("gorilla"); // Already in the Autocompleter
+	animals.insert("gorilla"); // Already in the Autocompleter
 	test(animals.size() == 12);
 
 	test(animals.completion_count("a") == 4);
@@ -100,19 +98,27 @@ int main()
 	test(animals.completion_count("goat-billed carp") == 0);
 
 
-	// Create an autocompleter of the 10000 most common
-	// American English words and test for correctness.
+	// Create an autocompleter of 10000 common English words
 	Autocompleter dictionary;
 
 	// Fill autocompleter with words
+	string* words = new string[10000];
 	ifstream f;
-	f.open("words_10000.txt", ios::in);
-	assert(f.is_open()); // If this fails, you're missing above file
+	f.open("words.txt");
+	assert(f.is_open()); // If this fails, you're missing words.txt
 	string line;
+	int i = 0;
 	while (getline(f, line))
-		dictionary.add(line);
+	{
+		words[i] = line;
+		++i;
+	}
 	f.close();
-	test(dictionary.size() == 9990); // There are some duplicates 
+	assert(i == 10000); // If this fails, words.txt is wrong
+
+	for (int i = 0; i < 10000; ++i)
+		dictionary.insert(words[i]);
+	test(dictionary.size() == 10000); 
 
 	test(dictionary.completion_count("bir") == 5);
 	test(dictionary.completion_count("hap") == 6);	
@@ -216,25 +222,12 @@ int main()
 
 
 	// Test Autocompleter for completing 100000 words
-	system_clock::time_point start = system_clock::now();
 	for (int i = 0; i < 100000; ++i)
 		dictionary.completion_count(random_string(5));
-	system_clock::time_point end = system_clock::now();
-	float dur = duration<float>(end - start).count();
 
-	cout << "100000 calls to completion_count() took "; 
-	cout << dur << " seconds." << endl;
-	test(dur < 3.0);	
-
-	start = system_clock::now();
 	for (int i = 0; i < 100000; ++i)
 		dictionary.completions(random_string(5), results);
-	end = system_clock::now();
-	dur = duration<float>(end - start).count();
 
-	cout << "100000 calls to completions() took "; 
-	cout << dur << " seconds." << endl;
-	test(dur < 3.0);	
 
 	cout << "Assignment complete." << endl;
 }

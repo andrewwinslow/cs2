@@ -30,6 +30,7 @@ int main()
 	Pokemon zubat("Zubat", 41, Pokemon::Poison, Pokemon::Flying);
 	Pokemon toxicroak("Toxicroak", 454, Pokemon::Poison, Pokemon::Fighting);
 	Pokemon hawlucha("Hawlucha", 701, Pokemon::Fighting, Pokemon::Flying);
+	Pokemon hoothoot("Hoothoot", 163, Pokemon::Flying, Pokemon::Normal);
 
 
 	// Test name()	
@@ -43,6 +44,7 @@ int main()
 	test(zubat.name() == "Zubat");
 	test(toxicroak.name() == "Toxicroak");
 	test(hawlucha.name() == "Hawlucha");
+	test(hoothoot.name() == "Hoothoot");
 	
 
 	// Test Ndex()	
@@ -57,6 +59,7 @@ int main()
 	test(zubat.Ndex() == 41);
 	test(toxicroak.Ndex() == 454);
 	test(hawlucha.Ndex() == 701);
+	test(hoothoot.Ndex() == 163);
 
 
 	// Test is_multitype()
@@ -71,6 +74,7 @@ int main()
 	test(zubat.is_multitype());	
 	test(toxicroak.is_multitype());	
 	test(hawlucha.is_multitype());	
+	test(hoothoot.is_multitype());	
 
 	
 	// Test type1()
@@ -85,59 +89,78 @@ int main()
 	test(zubat.type1() == Pokemon::Poison);	
 	test(toxicroak.type1() == Pokemon::Poison);	
 	test(hawlucha.type1() == Pokemon::Fighting);	
+	test(hoothoot.type1() == Pokemon::Flying);	
 
 
-	// Test type1()
+	// Test type2()
+	test(bouffalant.type2() == Pokemon::Normal);
+	test(cinccino.type2() == Pokemon::Normal);
+	test(garbodor.type2() == Pokemon::Poison);
+	test(mankey.type2() == Pokemon::Fighting);
+	test(tornadus.type2() == Pokemon::Flying);
+
 	test(pidgey.type2() == Pokemon::Flying);
 	test(fletchling.type2() == Pokemon::Flying);	
 	test(zubat.type2() == Pokemon::Flying);	
 	test(toxicroak.type2() == Pokemon::Fighting);	
 	test(hawlucha.type2() == Pokemon::Flying);	
-
+	test(hoothoot.type2() == Pokemon::Normal);	
 
 	
 	// Test damage_multiplier() for single-type Pokemon
-	test(bouffalant.damage_multiplier(Pokemon::Normal) == 1.0f);	
-	test(bouffalant.damage_multiplier(Pokemon::Fighting) == 2.0f);	
-	test(bouffalant.damage_multiplier(Pokemon::Flying) == 1.0f);	
-	test(bouffalant.damage_multiplier(Pokemon::Poison) == 1.0f);	
+	test(bouffalant.damage_multiplier(Pokemon::Normal) == 1.0);	
+	test(bouffalant.damage_multiplier(Pokemon::Fighting) == 2.0);	
+	test(bouffalant.damage_multiplier(Pokemon::Flying) == 1.0);	
+	test(bouffalant.damage_multiplier(Pokemon::Poison) == 1.0);	
 	
-	test(garbodor.damage_multiplier(Pokemon::Normal) == 1.0f);	
-	test(garbodor.damage_multiplier(Pokemon::Fighting) == 0.5f);	
-	test(garbodor.damage_multiplier(Pokemon::Flying) == 1.0f);	
-	test(garbodor.damage_multiplier(Pokemon::Poison) == 0.5f);	
+	test(garbodor.damage_multiplier(Pokemon::Normal) == 1.0);	
+	test(garbodor.damage_multiplier(Pokemon::Fighting) == 0.5);	
+	test(garbodor.damage_multiplier(Pokemon::Flying) == 1.0);	
+	test(garbodor.damage_multiplier(Pokemon::Poison) == 0.5);	
 	
-	test(mankey.damage_multiplier(Pokemon::Normal) == 1.0f);	
-	test(mankey.damage_multiplier(Pokemon::Fighting) == 1.0f);	
-	test(mankey.damage_multiplier(Pokemon::Flying) == 2.0f);	
-	test(mankey.damage_multiplier(Pokemon::Poison) == 1.0f);	
+	test(mankey.damage_multiplier(Pokemon::Normal) == 1.0);	
+	test(mankey.damage_multiplier(Pokemon::Fighting) == 1.0);	
+	test(mankey.damage_multiplier(Pokemon::Flying) == 2.0);	
+	test(mankey.damage_multiplier(Pokemon::Poison) == 1.0);	
 
-	test(tornadus.damage_multiplier(Pokemon::Normal) == 1.0f);	
-	test(tornadus.damage_multiplier(Pokemon::Fighting) == 0.5f);
-	test(tornadus.damage_multiplier(Pokemon::Flying) == 1.0f);	
-	test(tornadus.damage_multiplier(Pokemon::Poison) == 1.0f);	
+	test(tornadus.damage_multiplier(Pokemon::Normal) == 1.0);	
+	test(tornadus.damage_multiplier(Pokemon::Fighting) == 0.5);
+	test(tornadus.damage_multiplier(Pokemon::Flying) == 1.0);	
+	test(tornadus.damage_multiplier(Pokemon::Poison) == 1.0);	
 	
 
 	// Test damage_multiplier() for multitype Pokemon
-	test(pidgey.damage_multiplier(Pokemon::Normal) == 1.0f);	
-	test(pidgey.damage_multiplier(Pokemon::Fighting) == 1.0f);	
-	test(pidgey.damage_multiplier(Pokemon::Flying) == 1.0f);	
-	test(pidgey.damage_multiplier(Pokemon::Poison) == 1.0f);	
+	test(pidgey.damage_multiplier(Pokemon::Normal) == 1.0);	
+	test(pidgey.damage_multiplier(Pokemon::Fighting) == 1.0);	
+	test(pidgey.damage_multiplier(Pokemon::Flying) == 1.0);	
+	test(pidgey.damage_multiplier(Pokemon::Poison) == 1.0);	
 
-	test(zubat.damage_multiplier(Pokemon::Normal) == 1.0f);	
-	test(zubat.damage_multiplier(Pokemon::Fighting) == 0.25f);	
-	test(zubat.damage_multiplier(Pokemon::Flying) == 1.0f);	
-	test(zubat.damage_multiplier(Pokemon::Poison) == 0.5f);
+	test(fletchling.damage_multiplier(Pokemon::Normal) == 1.0);	
+	test(fletchling.damage_multiplier(Pokemon::Fighting) == 1.0);	
+	test(fletchling.damage_multiplier(Pokemon::Flying) == 1.0);	
+	test(fletchling.damage_multiplier(Pokemon::Poison) == 1.0);
 
-	test(toxicroak.damage_multiplier(Pokemon::Normal) == 1.0f);	
-	test(toxicroak.damage_multiplier(Pokemon::Fighting) == 0.5f);	
-	test(toxicroak.damage_multiplier(Pokemon::Flying) == 2.0f);	
-	test(toxicroak.damage_multiplier(Pokemon::Poison) == 0.5f);
+	test(zubat.damage_multiplier(Pokemon::Normal) == 1.0);	
+	test(zubat.damage_multiplier(Pokemon::Fighting) == 0.25);	
+	test(zubat.damage_multiplier(Pokemon::Flying) == 1.0);	
+	test(zubat.damage_multiplier(Pokemon::Poison) == 0.5);
 
-	test(hawlucha.damage_multiplier(Pokemon::Normal) == 1.0f);	
-	test(hawlucha.damage_multiplier(Pokemon::Fighting) == 0.5f);	
-	test(hawlucha.damage_multiplier(Pokemon::Flying) == 2.0f);	
-	test(hawlucha.damage_multiplier(Pokemon::Poison) == 1.0f);
+	test(toxicroak.damage_multiplier(Pokemon::Normal) == 1.0);	
+	test(toxicroak.damage_multiplier(Pokemon::Fighting) == 0.5);	
+	test(toxicroak.damage_multiplier(Pokemon::Flying) == 2.0);	
+	test(toxicroak.damage_multiplier(Pokemon::Poison) == 0.5);
+
+	test(hawlucha.damage_multiplier(Pokemon::Normal) == 1.0);	
+	test(hawlucha.damage_multiplier(Pokemon::Fighting) == 0.5);	
+	test(hawlucha.damage_multiplier(Pokemon::Flying) == 2.0);	
+	test(hawlucha.damage_multiplier(Pokemon::Poison) == 1.0);
+
+	test(hoothoot.damage_multiplier(Pokemon::Normal) == 1.0);	
+	test(hoothoot.damage_multiplier(Pokemon::Fighting) == 1.0);	
+	test(hoothoot.damage_multiplier(Pokemon::Flying) == 1.0);	
+	test(hoothoot.damage_multiplier(Pokemon::Poison) == 1.0);
+
+
 	cout << "Assignment complete." << endl;
 }
 

@@ -32,11 +32,16 @@ class Pokedex
 		void remove(Pokemon* p);
 
 		// Returns a (pointer to a) pokemon in the pokedex with the given name.
-		// If none exists, returns 0.
+		// If none exists, returns nullptr.
+		//
+		// Hint: loop through all of A, searching for a Pokemon with
+		// the given name. Return the first one found.
 		Pokemon* lookup_by_name(string name);
 
 		// Returns a (pointer to a) pokemon in the pokedex with the given name.
-		// If none exists, returns 0.
+		// If none exists, returns nullptr.
+		//
+		// Hint: look in A[ndex]. 
 		Pokemon* lookup_by_Ndex(int ndex);
 
 		// Returns the number of pokemon in the pokedex.
@@ -45,7 +50,13 @@ class Pokedex
 	
 	private:
 		// The pokedex is represented as an array of Pokemon pointers.
-		// See the Hint section of the assignment document for more information.
+		//
+		// Hint: 
+		// 1. Initialize the values in A to nullptr.
+		// 2. When adding a Pokemon('s pointer), store the pointer in
+		//    the array index equal to the Pokemon's Ndex.
+		// 3. When removing a Pokemon('s pointer), do so by setting the
+		//    corresponding array index equal to nullptr.
 		Pokemon* A[1000];
 };
 

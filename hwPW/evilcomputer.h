@@ -18,7 +18,7 @@ class EvilComputer
 
 		// Guess a password for an agent.
 		// Returns whether the password guessed is correct.
-		bool guess(string user, string guess);
+		void guess(string user, string guess);
 
 		// Returns whether an agent's password has been correctly guessed.
 		bool is_hacked(string user);

@@ -1,12 +1,10 @@
 
 #include <sstream>
-#include <cstdlib>
 #include <iostream>
-#include <cassert>
+#include <cstdlib>
 #include "lfgqueue.h"
 
 using namespace std;
-
 
 inline void _test(const char* expression, const char* file, int line)
 {
@@ -34,21 +32,21 @@ int main()
 	// on a small example.
 	LFGQueue q;
 	test(q.size() == 0);
-	test(q.front_player(Player::Defender) == 0);
-	test(q.front_player(Player::Hunter) == 0);
-	test(q.front_player(Player::Bard) == 0);
+	test(q.front_player(Player::Defender) == nullptr);
+	test(q.front_player(Player::Hunter) == nullptr);
+	test(q.front_player(Player::Bard) == nullptr);
 
 	q.push_player(&daniela);
 	test(q.size() == 1);
 	test(q.front_player(Player::Defender) == &daniela);
-	test(q.front_player(Player::Hunter) == 0);
-	test(q.front_player(Player::Bard) == 0);
+	test(q.front_player(Player::Hunter) == nullptr);
+	test(q.front_player(Player::Bard) == nullptr);
 
 	q.push_player(&hector);
 	test(q.size() == 2);
 	test(q.front_player(Player::Defender) == &daniela);
 	test(q.front_player(Player::Hunter) == &hector);
-	test(q.front_player(Player::Bard) == 0);
+	test(q.front_player(Player::Bard) == nullptr);
 
 	q.push_player(&berta);
 	test(q.size() == 3);
@@ -98,47 +96,47 @@ int main()
 	test(q.size() == 2);
 	test(q.front_player(Player::Defender) == &daria);
 	test(q.front_player(Player::Hunter) == &hugo);
-	test(q.front_player(Player::Bard) == 0);
+	test(q.front_player(Player::Bard) == nullptr);
 
 	q.pop_player(Player::Defender);
 	test(q.size() == 1);
-	test(q.front_player(Player::Defender) == 0);
+	test(q.front_player(Player::Defender) == nullptr);
 	test(q.front_player(Player::Hunter) == &hugo);
-	test(q.front_player(Player::Bard) == 0);
+	test(q.front_player(Player::Bard) == nullptr);
 	
 	q.pop_player(Player::Hunter);
 	test(q.size() == 0);
-	test(q.front_player(Player::Defender) == 0);
-	test(q.front_player(Player::Hunter) == 0);
-	test(q.front_player(Player::Bard) == 0);
+	test(q.front_player(Player::Defender) == nullptr);
+	test(q.front_player(Player::Hunter) == nullptr);
+	test(q.front_player(Player::Bard) == nullptr);
 
 	
 	// Test previous methods plus front_group(), pop_group() on 
 	// a small example.
 	q.push_player(&hugo);
 	test(q.size() == 1);
-	test(q.front_player(Player::Defender) == 0);
+	test(q.front_player(Player::Defender) == nullptr);
 	test(q.front_player(Player::Hunter) == &hugo);
-	test(q.front_player(Player::Bard) == 0);
+	test(q.front_player(Player::Bard) == nullptr);
 	test(!q.front_group(group));
 
 	q.push_player(&hector);
 	test(q.size() == 2);
-	test(q.front_player(Player::Defender) == 0);
+	test(q.front_player(Player::Defender) == nullptr);
 	test(q.front_player(Player::Hunter) == &hugo);
-	test(q.front_player(Player::Bard) == 0);
+	test(q.front_player(Player::Bard) == nullptr);
 	test(!q.front_group(group));
 
 	q.push_player(&berta);
 	test(q.size() == 3);
-	test(q.front_player(Player::Defender) == 0);
+	test(q.front_player(Player::Defender) == nullptr);
 	test(q.front_player(Player::Hunter) == &hugo);
 	test(q.front_player(Player::Bard) == &berta);
 	test(!q.front_group(group));
 
 	q.push_player(&bernardo);
 	test(q.size() == 4);
-	test(q.front_player(Player::Defender) == 0);
+	test(q.front_player(Player::Defender) == nullptr);
 	test(q.front_player(Player::Hunter) == &hugo);
 	test(q.front_player(Player::Bard) == &berta);
 	test(!q.front_group(group));
@@ -159,7 +157,7 @@ int main()
 
 	// Order is now [Hugo, Hector, Berta, Bernardo, Daria, Daniela]
 
-	group[0] = group[1] = group[2] = 0;
+	group[0] = group[1] = group[2] = nullptr;
 	test(q.front_group(group));
 	test(group[0] == &daria);
 	test(group[1] == &hugo);
@@ -171,7 +169,7 @@ int main()
 	test(q.front_player(Player::Hunter) == &hector);
 	test(q.front_player(Player::Bard) == &bernardo);
 
-	group[0] = group[1] = group[2] = 0;
+	group[0] = group[1] = group[2] = nullptr;
 	test(q.front_group(group));
 	test(group[0] == &daniela);
 	test(group[1] == &hector);
@@ -179,9 +177,9 @@ int main()
 
 	q.pop_group();
 	test(q.size() == 0);
-	test(q.front_player(Player::Defender) == 0);
-	test(q.front_player(Player::Hunter) == 0);
-	test(q.front_player(Player::Bard) == 0);
+	test(q.front_player(Player::Defender) == nullptr);
+	test(q.front_player(Player::Hunter) == nullptr);
+	test(q.front_player(Player::Bard) == nullptr);
 	
 
 	// Test a set of 999 players: 333 of each role in the following order:
@@ -218,7 +216,7 @@ int main()
 	// Because of how we scrambled, this has a fixed order.
 	for (int i = 0; i < 333; ++i)
 	{
-		group[0] = group[1] = group[2] = 0;
+		group[0] = group[1] = group[2] = nullptr;
 		test(q.front_group(group));	
 
 		oss.str("");
@@ -249,10 +247,10 @@ int main()
 
 	// Seed random number generator, so test uses the same
 	// "random" numbers every time and thus runs same everytime 
-	srand(2017); 
-		
+	srand(2018 + 's'); 
+
+
 	// Add 1000000 players
-	clock_t start = clock(); 
 	int added[3] = {0, 0, 0};
 	while (added[0] + added[1] + added[2] < 1000000)
 	{
@@ -276,30 +274,21 @@ int main()
 		q.push_player(new Player(name, role));
 		++added[choice];
 	}
-	clock_t end = clock();
-	float duration = static_cast<float>(end - start) / CLOCKS_PER_SEC;
-
 	test(q.size() == 1000000);
-	cout << "Added 1000000 players to a queue in ";
-	cout << duration << " seconds."  << endl;
-	test(duration < 3.0);
 
 	// Remove as many complete groups as possible
-	int complete_groups = min(added[0], min(added[1], added[2]));
-	assert(complete_groups > 50000); // Should be more like 167000
-	start = clock();
+	int complete_groups = added[0];
+        if (added[1] < complete_groups)
+                complete_groups = added[1];
+        if (added[2] < complete_groups)
+                complete_groups = added[2];
 	for (int i = 0; i < complete_groups; ++i)
 	{
 		q.pop_group();
 		test(q.size() == 1000000 - 3 * (i+1)); 
 	}
-	end = clock();
-	duration = static_cast<float>(end - start) / CLOCKS_PER_SEC;
-
 	test(q.size() == 1000000 - 3 * complete_groups);
-	cout << "Removed " << complete_groups << " groups of players from ";
-	cout << "this queue in " << duration << " seconds." << endl;
-	test(duration < 3.0);
+
 
 	cout << "Assignment complete." << endl;
 }

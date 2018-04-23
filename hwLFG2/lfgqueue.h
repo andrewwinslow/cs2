@@ -9,7 +9,6 @@ class LFGQueue
 	public:
 		// All of the methods are the same 
 		// as in hwLFG1.
-
 		LFGQueue();
 
 		int size();
@@ -29,6 +28,11 @@ class LFGQueue
 				Node* next;
 		};
 
+                // You can index into these arrays using Player::Role values!
+                // Check out player.h to see the int value of each Role.
+                //
+                // This lets you do things like:
+                // "if (heads[p->role()] == nullptr)" and "++counts[p->role()]" 
 		Node* heads[3];
 		Node* tails[3];
 		int counts[3];

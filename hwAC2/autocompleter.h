@@ -11,7 +11,7 @@ class Autocompleter
 	public:
 		// Same as hwAC1
 		Autocompleter();
-		void add(string x);
+		void insert(string x); // a.k.a. add()
 		int size();
 		int completion_count(string x);
 		void completions(string x, string* suggestions);
@@ -25,7 +25,7 @@ class Autocompleter
 				Node(string s)
 				{
 					this->s = s;
-					left = right = 0;
+					left = right = nullptr;
 				}
 
 				string s;
@@ -40,13 +40,11 @@ class Autocompleter
 		// Here's a (recursive) algorithm:
 		//
 		// Base case: 
-		// If root == 0, then return 0.
+		// If root is nullptr, then return 0.
 		//
-		// Inductive case:
-		// -If x < root->s and root->s does not start with x, recurse into left subtree.
-		// -If x < root->s and root->s starts with x, recurse into both subtrees.
-		// -If x > root->s, recurse into right subtree.
-		// -Return the sum of the recursive calls plus:
+		// Recursive case:
+		// -Return the sum of the completion counts of the 
+		//  left and right subtrees plus:
 		//     0 if root->s does not start with x.
 		//     1 if root->s does start with x.  
 		int completion_count_recurse(string x, Node* root);
@@ -55,18 +53,15 @@ class Autocompleter
 		// Here's a (recursive) algorithm:
 		//
 		// Base case:
-		// If root == 0, then return.
-		// If the last entry of the suggestions array is not "", then return
-		// (completions() has already found 5 suggestions).
+		// If root is nullptr, return.
+		// If the last entry of the suggestions array is not "", return.
+		// (since completions() has already found 5 suggestions).
 		//
-		// Inductive case:
-		// -Use recursion to visit all nodes containing x like in completion_count_recurse().
-		// -Make sure this recursion visits nodes in the following order:
-		//  1. Left subtree.
-		//  2. Root.
-		//  3. Right subtree.
-		// -At each node visited, look at suggestions array.
-		// -Store the node's string into the first array location whose string is "".
+		// Recursive case:
+		// -Recurse on left subtree.
+		// -If root->s starts with x, add root->s to first empty
+		//  location in suggestions.
+		// -Recurse on right subtree.
 		void completions_recurse(string x, string* suggestions, Node* root);
 
 		// The data structure should be a binary search tree

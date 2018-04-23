@@ -22,191 +22,333 @@ inline void _test(const char* expression, const char* file, int line)
 
 int main()
 {
-	// Array used later
-	int hws[15];
-	int exams[2];
+	// Variables used later
+	int hws[14];
+	int exercises;
+	int midterm;
+	int final_exam;
 
 	
-	// Test a few cases where an invalid grade has been given
-	for (int i = 0; i < 15; ++i)
+	// Test invalid grades
+	for (int i = 0; i < 14; ++i)
 		hws[i] = 100;	
-	exams[0] = 100;	
-	exams[1] = 100;	
+	exercises = 100;
+	midterm = 100;
+	final_exam = 100;
 
 	hws[0] = -1;
-	test(grade(hws, exams[0], exams[1]) == 'X');
+	test(grade(hws, exercises, midterm, final_exam) == 'X');
 	hws[0] = 101;
-	test(grade(hws, exams[0], exams[1]) == 'X');
+	test(grade(hws, exercises, midterm, final_exam) == 'X');
 	hws[0] = 100;
 
 	hws[9] = -1;
-	test(grade(hws, exams[0], exams[1]) == 'X');
+	test(grade(hws, exercises, midterm, final_exam) == 'X');
 	hws[9] = 101;
-	test(grade(hws, exams[0], exams[1]) == 'X');
+	test(grade(hws, exercises, midterm, final_exam) == 'X');
 	hws[9] = 100;
 
-	hws[14] = -1;
-	test(grade(hws, exams[0], exams[1]) == 'X');
-	hws[14] = 101;
-	test(grade(hws, exams[0], exams[1]) == 'X');
-	hws[14] = 100;
+	hws[13] = -1;
+	test(grade(hws, exercises, midterm, final_exam) == 'X');
+	hws[13] = 101;
+	test(grade(hws, exercises, midterm, final_exam) == 'X');
+	hws[13] = 100;
 
-	exams[0] = -1;
-	test(grade(hws, exams[0], exams[1]) == 'X');
-	exams[0] = 101;
-	test(grade(hws, exams[0], exams[1]) == 'X');
-	exams[0] = 100;
+	exercises = -1;
+	test(grade(hws, exercises, midterm, final_exam) == 'X');
+	exercises = 101;
+	test(grade(hws, exercises, midterm, final_exam) == 'X');
+	exercises = 100;
+	
+	midterm = -1;
+	test(grade(hws, exercises, midterm, final_exam) == 'X');
+	midterm = 101;
+	test(grade(hws, exercises, midterm, final_exam) == 'X');
+	midterm = 100;
 
-	exams[1] = -1;
-	test(grade(hws, exams[0], exams[1]) == 'X');
-	exams[1] = 101;
-	test(grade(hws, exams[0], exams[1]) == 'X');
-	exams[1] = 100;
+	final_exam = -1;
+	test(grade(hws, exercises, midterm, final_exam) == 'X');
+	final_exam = 101;
+	test(grade(hws, exercises, midterm, final_exam) == 'X');
+	final_exam = 100;
 
-	test(grade(hws, exams[0], exams[1]) == 'A');
+	test(grade(hws, exercises, midterm, final_exam) == 'A');
 
 
 	// Set all scores to 90	to test a few borderline cases
-	for (int i = 0; i < 15; ++i)
+	for (int i = 0; i < 14; ++i)
 		hws[i] = 90;	
-	exams[0] = 90;	
-	exams[1] = 90;	
+	exercises = 90;
+	midterm = 90;	
+	final_exam = 90;	
 	
 	hws[7] = 91;	
-	test(grade(hws, exams[0], exams[1]) == 'A');
+	test(grade(hws, exercises, midterm, final_exam) == 'A');
 	hws[7] = 89;	
-	test(grade(hws, exams[0], exams[1]) == 'B');
+	test(grade(hws, exercises, midterm, final_exam) == 'B');
 	hws[7] = 90;	
+	
+	exercises = 91;
+	test(grade(hws, exercises, midterm, final_exam) == 'A');
+	exercises = 89;
+	test(grade(hws, exercises, midterm, final_exam) == 'B');
+	exercises = 90;
 
-	exams[0] = 91;
-	test(grade(hws, exams[0], exams[1]) == 'A');
-	exams[0] = 89;
-	test(grade(hws, exams[0], exams[1]) == 'B');
-	exams[0] = 90;
+	midterm = 91;
+	test(grade(hws, exercises, midterm, final_exam) == 'A');
+	midterm = 89;
+	test(grade(hws, exercises, midterm, final_exam) == 'B');
+	midterm = 90;
 
-	exams[1] = 91;
-	test(grade(hws, exams[0], exams[1]) == 'A');
-	exams[1] = 89;
-	test(grade(hws, exams[0], exams[1]) == 'B');
-	exams[1] = 90;
+	final_exam = 91;
+	test(grade(hws, exercises, midterm, final_exam) == 'A');
+	final_exam = 89;
+	test(grade(hws, exercises, midterm, final_exam) == 'B');
+	final_exam = 90;
 
 
 	// 100 on homeworks
+	// 100 on exercises
 	// 100 on midterm
 	// 100 on final
-	for (int i = 0; i < 15; ++i)
+	for (int i = 0; i < 14; ++i)
 		hws[i] = 100; 
-	exams[0] = 100;
-	exams[1] = 100;
-	test(grade(hws, exams[0], exams[1]) == 'A');
+	exercises = 100;
+	midterm = 100;
+	final_exam = 100;
+	test(grade(hws, exercises, midterm, final_exam) == 'A');
 
 	// 70 on homeworks
+	// 100 on exercises
 	// 100 on midterm
 	// 100 on final
-	for (int i = 0; i < 15; ++i)
+	for (int i = 0; i < 14; ++i)
 		hws[i] = 70;	
-	exams[0] = 100;
-	exams[1] = 100;
-	test(grade(hws, exams[0], exams[1]) == 'B');
+	exercises = 100;
+	midterm = 100;
+	final_exam = 100;
+	test(grade(hws, exercises, midterm, final_exam) == 'B');
 
 	// 100 on homeworks
+	// 0 on exercises
+	// 100 on midterm
+	// 100 on final
+	for (int i = 0; i < 14; ++i)
+		hws[i] = 100;	
+	exercises = 0;
+	midterm = 100;
+	final_exam = 100;
+	test(grade(hws, exercises, midterm, final_exam) == 'A');
+
+	// 90 on homeworks
+	// 0 on exercises
+	// 100 on midterm
+	// 100 on final
+	for (int i = 0; i < 14; ++i)
+		hws[i] = 90;
+	exercises = 0;
+	midterm = 100;
+	final_exam = 100;
+	test(grade(hws, exercises, midterm, final_exam) == 'A');
+
+	// 90 on homeworks
+	// 100 on exercises
+	// 100 on midterm
+	// 100 on final
+	for (int i = 0; i < 14; ++i)
+		hws[i] = 90;
+	exercises = 0;
+	midterm = 100;
+	final_exam = 100;
+	test(grade(hws, exercises, midterm, final_exam) == 'A');
+
+	// 50 on homeworks
+	// 100 on exercises
+	// 100 on midterm
+	// 100 on final
+	for (int i = 0; i < 14; ++i)
+		hws[i] = 50;
+	exercises = 100;
+	midterm = 100;
+	final_exam = 100;
+	test(grade(hws, exercises, midterm, final_exam) == 'C');
+
+	// 45 on homeworks
+	// 100 on exercises
+	// 100 on midterm
+	// 100 on final
+	for (int i = 0; i < 14; ++i)
+		hws[i] = 45;
+	exercises = 100;
+	midterm = 100;
+	final_exam = 100;
+	test(grade(hws, exercises, midterm, final_exam) == 'D');
+
+	// 100 on homeworks
+	// 100 on exercises
 	// 60 on midterm
 	// 100 on final
-	for (int i = 0; i < 15; ++i)
+	for (int i = 0; i < 14; ++i)
 		hws[i] = 100;	
-	exams[0] = 60;
-	exams[1] = 100;
-	test(grade(hws, exams[0], exams[1]) == 'B');
+	exercises = 100;
+	midterm = 60;
+	final_exam = 100;
+	test(grade(hws, exercises, midterm, final_exam) == 'A');
 
 	// 100 on homeworks
-	// 100 on midterm
-	// 60 on final
-	for (int i = 0; i < 15; ++i)
+	// 100 on exercises
+	// 40 on midterm
+	// 100 on final
+	for (int i = 0; i < 14; ++i)
 		hws[i] = 100;	
-	exams[0] = 100;
-	exams[1] = 60;
-	test(grade(hws, exams[0], exams[1]) == 'B');
+	exercises = 100;
+	midterm = 40;
+	final_exam = 100;
+	test(grade(hws, exercises, midterm, final_exam) == 'B');
 
 	// 100 on homeworks
+	// 100 on exercises
 	// 100 on midterm
 	// 60 on final
-	for (int i = 0; i < 15; ++i)
+	for (int i = 0; i < 14; ++i)
 		hws[i] = 100;	
-	exams[0] = 100;
-	exams[1] = 60;
-	test(grade(hws, exams[0], exams[1]) == 'B');
+	exercises = 100;
+	midterm = 100;
+	final_exam = 60;
+	test(grade(hws, exercises, midterm, final_exam) == 'A');
+
+	// 100 on homeworks
+	// 100 on exercises
+	// 100 on midterm
+	// 40 on final
+	for (int i = 0; i < 14; ++i)
+		hws[i] = 100;	
+	exercises = 100;
+	midterm = 100;
+	final_exam = 40;
+	test(grade(hws, exercises, midterm, final_exam) == 'B');
 
 	// 70 on homeworks
-	// 81 on midterm
-	// 81 on final
-	for (int i = 0; i < 15; ++i)
+	// 100 on exercises
+	// 75 on midterm
+	// 75 on final
+	for (int i = 0; i < 14; ++i)
 		hws[i] = 70;	
-	exams[0] = 81;
-	exams[1] = 81;
-	test(grade(hws, exams[0], exams[1]) == 'C');
+	exercises = 100;
+	midterm = 75;
+	final_exam = 75;
+	test(grade(hws, exercises, midterm, final_exam) == 'C');
+
+	// 70 on homeworks
+	// 0 on exercises
+	// 75 on midterm
+	// 75 on final
+	for (int i = 0; i < 14; ++i)
+		hws[i] = 70;	
+	exercises = 0;
+	midterm = 75;
+	final_exam = 75;
+	test(grade(hws, exercises, midterm, final_exam) == 'D');
+
+	// 70 on homeworks
+	// 50 on exercises
+	// 75 on midterm
+	// 75 on final
+	for (int i = 0; i < 14; ++i)
+		hws[i] = 70;	
+	exercises = 50;
+	midterm = 75;
+	final_exam = 75;
+	test(grade(hws, exercises, midterm, final_exam) == 'C');
+
+	// 70 on homeworks
+	// 10 on exercises
+	// 75 on midterm
+	// 75 on final
+	for (int i = 0; i < 14; ++i)
+		hws[i] = 70;	
+	exercises = 10;
+	midterm = 75;
+	final_exam = 75;
+	test(grade(hws, exercises, midterm, final_exam) == 'D');
 
 	// 100 on homeworks
+	// 50 on exercises
 	// 0 on midterm
 	// 100 on final
-	for (int i = 0; i < 15; ++i)
+	for (int i = 0; i < 14; ++i)
 		hws[i] = 100;	
-	exams[0] = 0;
-	exams[1] = 100;
-	test(grade(hws, exams[0], exams[1]) == 'C');
+	exercises = 50;
+	midterm = 0;
+	final_exam = 100;
+	test(grade(hws, exercises, midterm, final_exam) == 'C');
 	
-	// 62 on homeworks
-	// 81 on midterm
-	// 81 on final
-	for (int i = 0; i < 15; ++i)
-		hws[i] = 62;	
-	exams[0] = 81;
-	exams[1] = 81;
-	test(grade(hws, exams[0], exams[1]) == 'C');
-	
-	// 62 on homeworks
-	// 75 on midterm
-	// 75 on final
-	for (int i = 0; i < 15; ++i)
-		hws[i] = 62;	
-        exams[0] = 75;
-        exams[1] = 75;
-	test(grade(hws, exams[0], exams[1]) == 'D');
-	
-	// 44 on homeworks
-	// 75 on midterm
-	// 75 on final
-	for (int i = 0; i < 15; ++i)
-		hws[i] = 48;	
-        exams[0] = 75;
-        exams[1] = 75;
-	test(grade(hws, exams[0], exams[1]) == 'D');
-
-	// 36 on homeworks
-	// 75 on midterm
-	// 75 on final
-	for (int i = 0; i < 15; ++i)
-		hws[i] = 42;	
-        exams[0] = 75;
-        exams[1] = 75;
-	test(grade(hws, exams[0], exams[1]) == 'F');
-
-	// 0 on homeworks
-	// 100 midterm
+	// 60 on homeworks
+	// 50 on exercises
+	// 20 on midterm
 	// 100 on final
-	for (int i = 0; i < 15; ++i)
+	for (int i = 0; i < 14; ++i)
+		hws[i] = 60;	
+	exercises = 50;
+	midterm = 20;
+	final_exam = 100;
+	test(grade(hws, exercises, midterm, final_exam) == 'F');
+	
+	// 60 on homeworks
+	// 100 on exercises
+	// 20 on midterm
+	// 100 on final
+	for (int i = 0; i < 14; ++i)
+		hws[i] = 60;	
+	exercises = 100;
+	midterm = 20;
+	final_exam = 100;
+	test(grade(hws, exercises, midterm, final_exam) == 'D');
+	
+	// 60 on homeworks
+	// 100 on exercises
+	// 20 on midterm
+	// 90 on final
+	for (int i = 0; i < 14; ++i)
+		hws[i] = 60;	
+	exercises = 100;
+	midterm = 20;
+	final_exam = 90;
+	test(grade(hws, exercises, midterm, final_exam) == 'F');
+	
+	// 0 on homeworks
+	// 100 on exercises
+	// 100 on midterm
+	// 100 on final
+	for (int i = 0; i < 14; ++i)
 		hws[i] = 0;	
-        exams[0] = 100;
-        exams[1] = 100;
-	test(grade(hws, exams[0], exams[1]) == 'F');
-
-	// 100 on homeworks
-	// 0 midterm
-	// 0 on final
-	for (int i = 0; i < 15; ++i)
-		hws[i] = 100;	
-        exams[0] = 0;
-        exams[1] = 0;
-	test(grade(hws, exams[0], exams[1]) == 'F');
+	exercises = 100;
+	midterm = 100;
+	final_exam = 100;
+	test(grade(hws, exercises, midterm, final_exam) == 'F');
+	
+	// 25 on homeworks
+	// 100 on exercises
+	// 100 on midterm
+	// 100 on final
+	for (int i = 0; i < 14; ++i)
+		hws[i] = 25;	
+	exercises = 100;
+	midterm = 100;
+	final_exam = 100;
+	test(grade(hws, exercises, midterm, final_exam) == 'F');
+	
+	// 30 on homeworks
+	// 100 on exercises
+	// 100 on midterm
+	// 100 on final
+	for (int i = 0; i < 14; ++i)
+		hws[i] = 30;	
+	exercises = 100;
+	midterm = 100;
+	final_exam = 100;
+	test(grade(hws, exercises, midterm, final_exam) == 'D');
+	
 
 	cout << "Assignment complete." << endl;	
 }

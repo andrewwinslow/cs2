@@ -22,15 +22,20 @@ class Pokemon
 
 		// Returns the name of the pokemon 
 		string name();
+
 		// Returns the Ndex (national index) of the Pokemon
 		int Ndex();
+
 		// Returns the first (and possibly only) type of the Pokemon
 		Type type1();
+
 		// Returns whether the Pokemon has multiple types
 		bool is_multitype();
-		// Returns the second type of the Pokemon (if it has one)
-		// and otherwise the Pokemon's only type
+
+		// If the Pokemon has two types, returns the second type of the Pokemon.
+		// Otherwise returns the Pokemon's only type.
 		Type type2();
+
 
 		// The damage multiplier of a move against a Pokemon 
 		// is the product of the multiplier for each of the Pokemon's types.

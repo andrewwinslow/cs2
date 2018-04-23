@@ -1,7 +1,5 @@
 
-#include <fstream>
 #include <iostream>
-#include <cstdlib>
 #include "browserhistory.h"
 
 
@@ -16,9 +14,9 @@ inline void _test(const char* expression, const char* file, int line)
 
 void interactive_mode()
 {
-	cout << "Choose (B)ack, (F)orward, or enter a url to go to." << endl;
-
 	BrowserHistory bh("http://google.com");
+	cout << "Starting at " << bh.current_url() << "." << endl;
+	cout << "Choose (B)ack, (F)orward, or enter a url to go to." << endl;
 
 	string line;
 	while (cin)
@@ -30,7 +28,7 @@ void interactive_mode()
 			if (bh.can_go_back())
 			{
 				bh.back();
-				cout << "    Back to " << bh.current_url() << endl;
+				cout << "    Now at " << bh.current_url() << endl;
 			}
 			else
 				cout << "    Cannot go back." << endl;
@@ -41,15 +39,15 @@ void interactive_mode()
 			if (bh.can_go_forward())
 			{
 				bh.forward();
-				cout << "    Forward to " << bh.current_url() << endl;
+				cout << "    Now at " << bh.current_url() << endl;
 			}
 			else
 				cout << "    Cannot go forward." << endl;
 		}
-		else
+		else if (line.size() > 0)
 		{
 			bh.go_to_url(line);
-			cout << "    Gone to " << bh.current_url() << endl;
+			cout << "    Now at " << bh.current_url() << endl;
 		}
 	}
 	exit(0);
@@ -59,6 +57,7 @@ void interactive_mode()
 int main()
 {
 	// Uncomment line below to use your BrowserHistory interactively.
+	// 
 	// interactive_mode();
 
 
@@ -119,6 +118,21 @@ int main()
 	test(bh.current_url() == "http://google.com");
 	bh.back(); // Can't go back any more, so do nothing
 	test(bh.current_url() == "http://google.com");
+
+	
+	// Larger test 
+	string url("http://url00.com");
+	for (int i = 0; i < 100; ++i)
+	{
+		url[10] = i / 10 + '0';
+		url[11] = i % 10 + '0';
+		bh.go_to_url(url);
+	} 
+	// History: [url00.com, url01.com, url02.com, ..., (url99.com)]
+	for (int i = 0; i < 49; ++i)
+		bh.back();
+	// History: [url00.com, url01.com, ..., (url50.com), ..., url99.com]
+	test(bh.current_url() == "http://url50.com");	
 
 	cout << "Assignment complete." << endl;
 }

@@ -9,7 +9,7 @@ using namespace std;
 class Player
 {
 	public:
-		// This works like a custom type with just four values.
+		// This works like a custom type with just three values.
 		// Outside of Player methods, reference them like:
 		// "if (p->role == Player::Defender)", etc.
 		enum Role {Defender=0, Hunter=1, Bard=2};

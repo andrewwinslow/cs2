@@ -24,18 +24,18 @@ int main()
 
 	
 	// Test total_user_count(), create_user()
-	test(ls.create_user("Ernesto", "p455w0rd", 90210));
+	test(ls.create_user("Ernesto", "p455w0rd"));
 	test(ls.total_user_count() == 1);
-	test(ls.create_user("Ruby", "QwErTy123", 86753));
+	test(ls.create_user("Ruby", "QwErTy123"));
 	test(ls.total_user_count() == 2);
-	test(ls.create_user("Hugo", "1l0v3c4t5", 12349));
+	test(ls.create_user("Hugo", "1l0v3c4t5"));
 	test(ls.total_user_count() == 3);
-	test(ls.create_user("Margo", "Din0s4ur5!", 55518));
+	test(ls.create_user("Margo", "Din0s4ur5!"));
 	test(ls.total_user_count() == 4);
-	test(ls.create_user("Berta", "!sc00p0f00d!", 83017));
+	test(ls.create_user("Berta", "!sc00p0f00d!"));
 	test(ls.total_user_count() == 5);
 
-	test(!ls.create_user("Berta", "anotherp455", 83017));
+	test(!ls.create_user("Berta", "anotherp455"));
 	test(ls.total_user_count() == 5);
 	
 	test(ls.delete_user("Berta", "!sc00p0f00d!"));
@@ -47,7 +47,7 @@ int main()
 	test(!ls.delete_user("Berta", "!sc00p0f00d!"));
 	test(ls.total_user_count() == 4);
 
-	test(ls.create_user("Berta", "!sc00p0f00d!", 83017));
+	test(ls.create_user("Berta", "!sc00p0f00d!"));
 	test(ls.total_user_count() == 5);
 
 

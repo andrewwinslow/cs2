@@ -3,11 +3,9 @@
 #include <fstream>
 #include <cassert>
 #include <string>
-#include <chrono>
 #include "autocompleter.h"
 
 using namespace std;
-using namespace chrono;
 
 inline void _test(const char* expression, const char* file, int line)
 {
@@ -35,11 +33,11 @@ void interactive_mode()
 
 	// Fill autocompleter with words
 	ifstream f;
-	f.open("words_50000.txt", ios::in);
-	assert(f.is_open()); // If this fails, you're missing words_50000.txt
+	f.open("words.txt");
+	assert(f.is_open()); // If this fails, you're missing words.txt
 	string line;
 	while (getline(f, line))
-		dictionary.add(line);
+		dictionary.insert(line);
 	f.close();
 
 	string results[5];
@@ -64,7 +62,7 @@ int main()
 
 	// Uncomment line below to use your Autocompleter interactively.
 	// Enter a string and press Enter - the autocompletions
-	// results from the 10000 most common words are printed.
+	// results from the 100000 most common words are printed.
 	// 
 	// interactive_mode();
 
@@ -73,21 +71,21 @@ int main()
 	Autocompleter animals;
 	test(animals.size() == 0);
 
-	animals.add("aardvark");
-	animals.add("albatross");
-	animals.add("alpaca");
-	animals.add("armadillo");
-	animals.add("camel");
-	animals.add("cat");
-	animals.add("crocodile");
-	animals.add("crow");
-	animals.add("giraffe");
-	animals.add("goat");
-	animals.add("goose");
-	animals.add("gorilla");
+	animals.insert("aardvark");
+	animals.insert("albatross");
+	animals.insert("alpaca");
+	animals.insert("armadillo");
+	animals.insert("camel");
+	animals.insert("cat");
+	animals.insert("crocodile");
+	animals.insert("crow");
+	animals.insert("giraffe");
+	animals.insert("goat");
+	animals.insert("goose");
+	animals.insert("gorilla");
 	test(animals.size() == 12);
 
-	animals.add("gorilla"); // Already in the Autocompleter
+	animals.insert("gorilla"); // Already in the Autocompleter
 	test(animals.size() == 12);
 
 	test(animals.completion_count("a") == 4);
@@ -103,15 +101,14 @@ int main()
 	test(animals.completion_count("goat-billed carp") == 0);
 
 
-	// Create an autocompleter of the 10000 most common
-	// American English words and test for correctness.
+	// Create an autocompleter of common words.
 	Autocompleter dictionary;
 
 	// Fill autocompleter with words
-	string* words = new string[50000];
+	string* words = new string[100000];
 	ifstream f;
-	f.open("words_50000.txt", ios::in);
-	assert(f.is_open()); // If this fails, you're missing words_50000.txt
+	f.open("words.txt");
+	assert(f.is_open()); // If this fails, you're missing words.txt
 	string line;
 	int i = 0;
 	while (getline(f, line))
@@ -120,24 +117,19 @@ int main()
 		++i;
 	}
 	f.close();
-	assert(i == 50000); // If this fails, words_50000.txt is wrong
+	assert(i == 100000); // If this fails, words.txt is wrong
 
-	system_clock::time_point start = system_clock::now();
-	for (int i = 0; i < 50000; ++i)
-		dictionary.add(words[i]);
-	system_clock::time_point end = system_clock::now();
-	float dur = duration<float>(end - start).count();
+	for (int i = 0; i < 100000; ++i)
+		dictionary.insert(words[i]);
 	delete[] words;
 
-	test(dictionary.size() == 42895); // There are some duplicates 
-	cout << "Creating an Autocompleter of 50000 words took ";
-	cout << dur << " seconds." << endl;
-	test(dur < 3.0);	
+	for (int i = 0; i < 10; ++i)
+		test(dictionary.size() == 100000); 
 
-	test(dictionary.completion_count("bir") == 11);
-	test(dictionary.completion_count("hap") == 14);	
-	test(dictionary.completion_count("program") == 3);
-	test(dictionary.completion_count("foo") == 27);
+	test(dictionary.completion_count("bir") == 55);
+	test(dictionary.completion_count("hap") == 25);	
+	test(dictionary.completion_count("program") == 25);
+	test(dictionary.completion_count("foo") == 68);
 
 
 	// Test completions() on animals Autocompleter already made.
@@ -204,63 +196,45 @@ int main()
 	test(results[3] == "");
 	test(results[4] == "");
 
-
 	// Test completions() on dictionary Autocompleter already made.
 	dictionary.completions("bir", results);
-	test(results[0] == "birch");
-	test(results[1] == "birches");
-	test(results[2] == "bird");
-	test(results[3] == "bird's");
-	test(results[4] == "birds");
+	test(results[0] == "bir");
+	test(results[1] == "biracial");
+	test(results[2] == "birch");
+	test(results[3] == "birches");
+	test(results[4] == "birchwood");
 
 	dictionary.completions("hap", results);
 	test(results[0] == "hap");
 	test(results[1] == "haphazard");
-	test(results[2] == "hapless");
-	test(results[3] == "haply");
-	test(results[4] == "happen");
+	test(results[2] == "haphazardly");
+	test(results[3] == "hapkido");
+	test(results[4] == "hapless");
 
 	dictionary.completions("program", results);
 	test(results[0] == "program");
-	test(results[1] == "programme");
-	test(results[2] == "programs");
-	test(results[3] == "");
-	test(results[4] == "");
+	test(results[1] == "programa");
+	test(results[2] == "programas");
+	test(results[3] == "programchecker");
+	test(results[4] == "programe");
 
 	dictionary.completions("foo", results);
-	test(results[0] == "food");
-	test(results[1] == "foods");
-	test(results[2] == "foodstuffs");
-	test(results[3] == "fool");
-	test(results[4] == "fool's");
+	test(results[0] == "foo");
+	test(results[1] == "foobar");
+	test(results[2] == "food");
+	test(results[3] == "foodborne");
+	test(results[4] == "foodie");
 
 
-	// Test Autocompleter for completing 100000 words
-	start = system_clock::now();
-	for (int i = 0; i < 100000; ++i)
+	// Test efficiency of completion_count() and completions()
+	for (int i = 0; i < 10; ++i)
 		dictionary.completion_count(random_string(5));
-	end = system_clock::now();
-	dur = duration<float>(end - start).count();
 
-	cout << "100000 calls to completion_count() on ";
-	cout << "this Autocompleter took " << dur << " seconds." << endl;
-	test(dur < 3.0);	
-
-	start = system_clock::now();
-	for (int i = 0; i < 100000; ++i)
+	for (int i = 0; i < 10; ++i)
 		dictionary.completions(random_string(5), results);
-	end = system_clock::now();
-	dur = duration<float>(end - start).count();
 
-	cout << "100000 calls to completions() on ";
-	cout << "this Autocompleter took " << dur << " seconds." << endl;
-	test(dur < 3.0);	
 
 	cout << "Assignment complete." << endl;
-
-
-
-
 }
 
 

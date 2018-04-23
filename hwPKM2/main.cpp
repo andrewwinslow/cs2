@@ -52,7 +52,7 @@ int main()
 	Pokemon zubat("Zubat, #041, Poison, Flying,");
 	Pokemon toxicroak("Toxicroak, #454, Poison, Fighting,");
 	Pokemon golbat("Golbat, #042, Poison, Flying,");
-	Pokemon hoothoot("Hoothoot, #163, Normal, Flying,");
+	Pokemon hoothoot("Hoothoot, #163, Flying, Normal,");
 
 	// Check that _name was set correctly 
 	test(bouffalant.name() == "Bouffalant");
@@ -123,9 +123,9 @@ int main()
 	test(golbat.is_multitype());
 	test(golbat.type2() == Pokemon::Flying);
 
-	test(hoothoot.type1() == Pokemon::Normal);
+	test(hoothoot.type1() == Pokemon::Flying);
 	test(hoothoot.is_multitype());
-	test(hoothoot.type2() == Pokemon::Flying);
+	test(hoothoot.type2() == Pokemon::Normal);
 	
 
 	// Test summary()	
@@ -141,259 +141,266 @@ int main()
 	test(zubat.summary() == "Zubat, #041, Poison, Flying,");
 	test(toxicroak.summary() == "Toxicroak, #454, Poison, Fighting,");
 	test(golbat.summary() == "Golbat, #042, Poison, Flying,");
-	test(hoothoot.summary() == "Hoothoot, #163, Normal, Flying,");
+	test(hoothoot.summary() == "Hoothoot, #163, Flying, Normal,");
 
 
 
 
 	// ***** Test Pokedex ***** 
 
-	Pokedex d1;
+	Pokedex D1;
 
 	// Test add() and size()
-	test(d1.size() == 0);
-	d1.add(&bouffalant);
-	test(d1.size() == 1);
-	d1.add(&mankey);
-	test(d1.size() == 2);
-	d1.add(&tornadus);
-	test(d1.size() == 3);
-	d1.add(&grimer);
-	test(d1.size() == 4);
-	d1.add(&timburr);
-	test(d1.size() == 5);
-	d1.add(&tonkamon);
-	test(d1.size() == 6);
+	test(D1.size() == 0);
+	D1.add(&bouffalant);
+	test(D1.size() == 1);
+	D1.add(&mankey);
+	test(D1.size() == 2);
+	D1.add(&tornadus);
+	test(D1.size() == 3);
+	D1.add(&grimer);
+	test(D1.size() == 4);
+	D1.add(&timburr);
+	test(D1.size() == 5);
+	D1.add(&tonkamon);
+	test(D1.size() == 6);
 	
-	d1.add(&pidgey);
-	test(d1.size() == 7);
-	d1.add(&fletchling);
-	test(d1.size() == 8);
-	d1.add(&zubat);
-	test(d1.size() == 9);
-	d1.add(&toxicroak);
-	test(d1.size() == 10);
-	d1.add(&golbat);
-	test(d1.size() == 11);
-	d1.add(&hoothoot);
-	test(d1.size() == 12);
+	D1.add(&pidgey);
+	test(D1.size() == 7);
+	D1.add(&fletchling);
+	test(D1.size() == 8);
+	D1.add(&zubat);
+	test(D1.size() == 9);
+	D1.add(&toxicroak);
+	test(D1.size() == 10);
+	D1.add(&golbat);
+	test(D1.size() == 11);
+	D1.add(&hoothoot);
+	test(D1.size() == 12);
 
-	d1.add(&bouffalant);
-	test(d1.size() == 12);
-	d1.add(&hoothoot);	
-	test(d1.size() == 12);
+	D1.add(&bouffalant);
+	test(D1.size() == 12);
+	D1.add(&hoothoot);	
+	test(D1.size() == 12);
 
 
 	// Test add(), lookup_by_Ndex()
-	test(d1.lookup_by_Ndex(626) == &bouffalant);
-	test(d1.lookup_by_Ndex(56) == &mankey);
-	test(d1.lookup_by_Ndex(641) == &tornadus);
-	test(d1.lookup_by_Ndex(88) == &grimer);
-	test(d1.lookup_by_Ndex(532) == &timburr);
-	test(d1.lookup_by_Ndex(1) == &tonkamon);
-	test(d1.lookup_by_Ndex(16) == &pidgey);
-	test(d1.lookup_by_Ndex(661) == &fletchling);
-	test(d1.lookup_by_Ndex(41) == &zubat);
-	test(d1.lookup_by_Ndex(454) == &toxicroak);
-	test(d1.lookup_by_Ndex(42) == &golbat);
-	test(d1.lookup_by_Ndex(163) == &hoothoot);
+	test(D1.lookup_by_Ndex(626) == &bouffalant);
+	test(D1.lookup_by_Ndex(56) == &mankey);
+	test(D1.lookup_by_Ndex(641) == &tornadus);
+	test(D1.lookup_by_Ndex(88) == &grimer);
+	test(D1.lookup_by_Ndex(532) == &timburr);
+	test(D1.lookup_by_Ndex(1) == &tonkamon);
+	test(D1.lookup_by_Ndex(16) == &pidgey);
+	test(D1.lookup_by_Ndex(661) == &fletchling);
+	test(D1.lookup_by_Ndex(41) == &zubat);
+	test(D1.lookup_by_Ndex(454) == &toxicroak);
+	test(D1.lookup_by_Ndex(42) == &golbat);
+	test(D1.lookup_by_Ndex(163) == &hoothoot);
 
-	test(d1.lookup_by_Ndex(12) == 0);
-	test(d1.lookup_by_Ndex(34) == 0);
-	test(d1.lookup_by_Ndex(567) == 0);
+	test(D1.lookup_by_Ndex(12) == nullptr);
+	test(D1.lookup_by_Ndex(34) == nullptr);
+	test(D1.lookup_by_Ndex(567) == nullptr);
 
 
 	// Test lookup_by_name()
-	test(d1.lookup_by_name("Bouffalant") == &bouffalant);
-	test(d1.lookup_by_name("Mankey") == &mankey);
-	test(d1.lookup_by_name("Tornadus") == &tornadus);
-	test(d1.lookup_by_name("Grimer") == &grimer);
-	test(d1.lookup_by_name("Timburr") == &timburr);
-	test(d1.lookup_by_name("Tonkamon") == &tonkamon);
-	test(d1.lookup_by_name("Pidgey") == &pidgey);
-	test(d1.lookup_by_name("Fletchling") == &fletchling);
-	test(d1.lookup_by_name("Zubat") == &zubat);
-	test(d1.lookup_by_name("Toxicroak") == &toxicroak);
-	test(d1.lookup_by_name("Golbat") == &golbat);
-	test(d1.lookup_by_name("Hoothoot") == &hoothoot);
+	test(D1.lookup_by_name("Bouffalant") == &bouffalant);
+	test(D1.lookup_by_name("Mankey") == &mankey);
+	test(D1.lookup_by_name("Tornadus") == &tornadus);
+	test(D1.lookup_by_name("Grimer") == &grimer);
+	test(D1.lookup_by_name("Timburr") == &timburr);
+	test(D1.lookup_by_name("Tonkamon") == &tonkamon);
+	test(D1.lookup_by_name("Pidgey") == &pidgey);
+	test(D1.lookup_by_name("Fletchling") == &fletchling);
+	test(D1.lookup_by_name("Zubat") == &zubat);
+	test(D1.lookup_by_name("Toxicroak") == &toxicroak);
+	test(D1.lookup_by_name("Golbat") == &golbat);
+	test(D1.lookup_by_name("Hoothoot") == &hoothoot);
 
-	test(d1.lookup_by_name("Lemon") == 0);	
-	test(d1.lookup_by_name("Fakemon") == 0);	
-	test(d1.lookup_by_name("Notarealmon") == 0);	
+	test(D1.lookup_by_name("Lemon") == nullptr);	
+	test(D1.lookup_by_name("Fakemon") == nullptr);	
+	test(D1.lookup_by_name("Notarealmon") == nullptr);	
 
 
 	// Test remove()
-	test(d1.size() == 12);
-	test(d1.lookup_by_name("Bouffalant") == &bouffalant);
-	test(d1.lookup_by_Ndex(626) == &bouffalant);
-	test(d1.lookup_by_name("Zubat") == &zubat);
-	test(d1.lookup_by_Ndex(41) == &zubat);
-	test(d1.lookup_by_name("Hoothoot") == &hoothoot);
-	test(d1.lookup_by_Ndex(163) == &hoothoot);
+	test(D1.size() == 12);
+	test(D1.lookup_by_name("Bouffalant") == &bouffalant);
+	test(D1.lookup_by_Ndex(626) == &bouffalant);
+	test(D1.lookup_by_name("Zubat") == &zubat);
+	test(D1.lookup_by_Ndex(41) == &zubat);
+	test(D1.lookup_by_name("Hoothoot") == &hoothoot);
+	test(D1.lookup_by_Ndex(163) == &hoothoot);
 
-	d1.remove(&bouffalant);
-	test(d1.size() == 11);
-	test(d1.lookup_by_name("Bouffalant") == 0);
-	test(d1.lookup_by_Ndex(626) == 0);
+	D1.remove(&bouffalant);
+	test(D1.size() == 11);
+	test(D1.lookup_by_name("Bouffalant") == nullptr);
+	test(D1.lookup_by_Ndex(626) == nullptr);
 
-	d1.remove(&zubat);
-	test(d1.size() == 10);
-	test(d1.lookup_by_name("Zubat") == 0);
-	test(d1.lookup_by_Ndex(41) == 0);
+	D1.remove(&zubat);
+	test(D1.size() == 10);
+	test(D1.lookup_by_name("Zubat") == nullptr);
+	test(D1.lookup_by_Ndex(41) == nullptr);
 
-	d1.remove(&hoothoot);
-	test(d1.size() == 9);
-	test(d1.lookup_by_name("Hoothoot") == 0);
-	test(d1.lookup_by_Ndex(163) == 0);
+	D1.remove(&hoothoot);
+	test(D1.size() == 9);
+	test(D1.lookup_by_name("Hoothoot") == nullptr);
+	test(D1.lookup_by_Ndex(163) == nullptr);
 
-	test(d1.lookup_by_name("Mankey") == &mankey);
-	test(d1.lookup_by_name("Tornadus") == &tornadus);
-	test(d1.lookup_by_name("Grimer") == &grimer);
-	test(d1.lookup_by_name("Timburr") == &timburr);
-	test(d1.lookup_by_name("Tonkamon") == &tonkamon);
-	test(d1.lookup_by_name("Pidgey") == &pidgey);
-	test(d1.lookup_by_name("Fletchling") == &fletchling);
-	test(d1.lookup_by_name("Golbat") == &golbat);
-	test(d1.lookup_by_name("Toxicroak") == &toxicroak);
+	test(D1.lookup_by_name("Mankey") == &mankey);
+	test(D1.lookup_by_name("Tornadus") == &tornadus);
+	test(D1.lookup_by_name("Grimer") == &grimer);
+	test(D1.lookup_by_name("Timburr") == &timburr);
+	test(D1.lookup_by_name("Tonkamon") == &tonkamon);
+	test(D1.lookup_by_name("Pidgey") == &pidgey);
+	test(D1.lookup_by_name("Fletchling") == &fletchling);
+	test(D1.lookup_by_name("Golbat") == &golbat);
+	test(D1.lookup_by_name("Toxicroak") == &toxicroak);
 	
 
 	// Test save() and load(). 
 	// This will create and modify files on your computer 
 	// in the directory where the program lives.
 
-	// Delete any old pokedex1.txt still around
-	remove("./pokedex1.txt");
+	// Delete old version of test_pokedex1.txt if it exists
+	remove("./test_pokedex1.txt");
+
 	// Save Mankey, Tornadus, Grimer, Timburr, Tonkamon,
 	//      Pidgey, Fletchling, Golbat, Toxicroak	
-	d1.save("./pokedex1.txt"); 
+	D1.save("./test_pokedex1.txt"); 
 	                           
-
 	// Create a Pokedex with:
 	// Mankey, Tornadus, Grimer, Timburr, Tonkamon,
 	// Pidgey, Fletchling, Golbat, Toxicroak	
-	Pokedex d2("./pokedex1.txt");
+	Pokedex D2("./test_pokedex1.txt");
 
-	test(d2.size() == 9);	
+	test(D2.size() == 9);	
 
-	test(d2.lookup_by_name("Bouffalant") == 0);
+	test(D2.lookup_by_name("Bouffalant") == nullptr);
 
-	Pokemon* p = d2.lookup_by_name("Mankey");
-	test(p != 0);
+	Pokemon* p = D2.lookup_by_name("Mankey");
+	test(p != nullptr);
 	test(p->name() == mankey.name());
 	test(p->Ndex() == mankey.Ndex());
 	test(p->type1() == mankey.type1());
 	test(p->is_multitype() == mankey.is_multitype());
 
-	p = d2.lookup_by_name("Tornadus");
-	test(p != 0);
+	p = D2.lookup_by_name("Tornadus");
+	test(p != nullptr);
 	test(p->Ndex() == tornadus.Ndex());
 
-	p = d2.lookup_by_name("Grimer");
-	test(p != 0);
+	p = D2.lookup_by_name("Grimer");
+	test(p != nullptr);
 	test(p->Ndex() == grimer.Ndex());
 
-	p = d2.lookup_by_name("Timburr");
-	test(p != 0);
+	p = D2.lookup_by_name("Timburr");
+	test(p != nullptr);
 	test(p->Ndex() == timburr.Ndex());
 
-	p = d2.lookup_by_name("Tonkamon");
-	test(p != 0);
+	p = D2.lookup_by_name("Tonkamon");
+	test(p != nullptr);
 	test(p->Ndex() == tonkamon.Ndex());
 
-	p = d2.lookup_by_name("Pidgey");
-	test(p != 0);
+	p = D2.lookup_by_name("Pidgey");
+	test(p != nullptr);
 	test(p->name() == pidgey.name());
 	test(p->Ndex() == pidgey.Ndex());
 	test(p->type1() == pidgey.type1());
 	test(p->is_multitype() == pidgey.is_multitype());
 	test(p->type2() == pidgey.type2());
 
-	p = d2.lookup_by_name("Fletchling");
-	test(p != 0);
+	p = D2.lookup_by_name("Fletchling");
+	test(p != nullptr);
 	test(p->Ndex() == fletchling.Ndex());
 	
-	test(d2.lookup_by_name("Zubat") == 0);
+	test(D2.lookup_by_name("Zubat") == nullptr);
 
-	p = d2.lookup_by_name("Toxicroak");
-	test(p != 0);
+	p = D2.lookup_by_name("Toxicroak");
+	test(p != nullptr);
 	test(p->Ndex() == toxicroak.Ndex());
 
-	p = d2.lookup_by_name("Golbat");
-	test(p != 0);
+	p = D2.lookup_by_name("Golbat");
+	test(p != nullptr);
 	test(p->Ndex() == golbat.Ndex());
 
-	test(d2.lookup_by_name("Hoothoot") == 0);
+	test(D2.lookup_by_name("Hoothoot") == nullptr);
 
-		
-	d2.add(&bouffalant);
-	d2.add(&zubat);
-	d2.add(&hoothoot);
-	d2.remove(&mankey);
-	d2.remove(&toxicroak);
-	test(d2.size() == 10);
+	D2.add(&bouffalant);
+	D2.add(&zubat);
+	D2.add(&hoothoot);
+	D2.remove(&mankey);
+	D2.remove(&toxicroak);
+	test(D2.size() == 10);
 
+	// Remove file made during testing
+	remove("./test_pokedex1.txt");
+
+
+	// Delete old version of test_pokedex2.txt if it exists
+	remove("./test_pokedex2.txt");
 
 	// Save Bouffalant, Tornadus, Grimer, Timburr, Tonkamon,
 	//      Pidgey, Fletchling, Zubat, Golbat, Hoothoot 	
-	remove("./pokedex2.txt");
-	d2.save("./pokedex2.txt");
+	D2.save("./test_pokedex2.txt");
 
 	// Create a Pokedex with:
 	// Bouffalant, Tornadus, Grimer, Timburr, Tonkamon,
 	// Pidgey, Fletchling, Zubat, Golbat, Hoothoot 	
-	Pokedex d3("./pokedex2.txt"); 	
+	Pokedex D3("./test_pokedex2.txt"); 	
 
-	test(d3.size() == 10);
+	test(D3.size() == 10);
 
-	p = d3.lookup_by_name("Bouffalant");
+	p = D3.lookup_by_name("Bouffalant");
 	test(p->name() == bouffalant.name());
 	test(p->Ndex() == bouffalant.Ndex());
 	test(p->type1() == bouffalant.type1());
 	test(p->is_multitype() == bouffalant.is_multitype());
 
-	test(d3.lookup_by_name("Mankey") == 0);
+	test(D3.lookup_by_name("Mankey") == nullptr);
 
-	p = d3.lookup_by_name("Tornadus");
-	test(p != 0);
+	p = D3.lookup_by_name("Tornadus");
+	test(p != nullptr);
 	test(p->Ndex() == tornadus.Ndex());
 
-	p = d3.lookup_by_name("Grimer");
-	test(p != 0);
+	p = D3.lookup_by_name("Grimer");
+	test(p != nullptr);
 	test(p->Ndex() == grimer.Ndex());
 
-	p = d3.lookup_by_name("Timburr");
-	test(p != 0);
+	p = D3.lookup_by_name("Timburr");
+	test(p != nullptr);
 	test(p->Ndex() == timburr.Ndex());
 
-	p = d3.lookup_by_name("Tonkamon");
-	test(p != 0);
+	p = D3.lookup_by_name("Tonkamon");
+	test(p != nullptr);
 	test(p->Ndex() == tonkamon.Ndex());
 
-	p = d3.lookup_by_name("Pidgey");
-	test(p != 0);
+	p = D3.lookup_by_name("Pidgey");
+	test(p != nullptr);
 	test(p->name() == pidgey.name());
 	test(p->Ndex() == pidgey.Ndex());
 	test(p->type1() == pidgey.type1());
 	test(p->is_multitype() == pidgey.is_multitype());
 	test(p->type2() == pidgey.type2());
 	
-	p = d3.lookup_by_name("Fletchling");
-	test(p != 0);
+	p = D3.lookup_by_name("Fletchling");
+	test(p != nullptr);
 	test(p->Ndex() == fletchling.Ndex());
 	
-	p = d3.lookup_by_name("Zubat");
-	test(p != 0);
+	p = D3.lookup_by_name("Zubat");
+	test(p != nullptr);
 	test(p->Ndex() == zubat.Ndex());
 
-	p = d3.lookup_by_name("Golbat");
-	test(p != 0);
+	p = D3.lookup_by_name("Golbat");
+	test(p != nullptr);
 	test(p->Ndex() == golbat.Ndex());
 
-	test(d3.lookup_by_name("Toxicroak") == 0);
+	test(D3.lookup_by_name("Toxicroak") == nullptr);
 
-	p = d3.lookup_by_name("Hoothoot");
-	test(p != 0);
+	p = D3.lookup_by_name("Hoothoot");
+	test(p != nullptr);
 	test(p->Ndex() == hoothoot.Ndex());
+
+	// Remove file made during testing
+	remove("./test_pokedex2.txt");
 
 
 	ifstream f;
@@ -401,9 +408,26 @@ int main()
 	assert(f.is_open()); // If this fails, you're missing pokedex.txt
 	f.close();
  
-	Pokedex d4("./pokedex.txt");	
-	test(d4.size() == 125);
+	Pokedex D4("./pokedex.txt");	
+	test(D4.size() == 125);
 
+	p = D4.lookup_by_name("Staraptor");
+	test(p != nullptr);
+	test(p->name() == "Staraptor");
+	test(p->Ndex() == 398);
+	test(p->type1() == Pokemon::Normal);
+	test(p->is_multitype());
+	test(p->type2() == Pokemon::Flying);
+
+	p = D4.lookup_by_Ndex(143);
+	test(p != nullptr);
+	test(p->name() == "Snorlax");
+	test(p->Ndex() == 143);
+	test(p->type1() == Pokemon::Normal);
+	test(!p->is_multitype());
+
+	test(D4.lookup_by_name("Pikachu") == nullptr);
+	test(D4.lookup_by_Ndex(25) == nullptr);	
 	
 	cout << "Assignment complete." << endl; 
 }

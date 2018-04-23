@@ -13,12 +13,12 @@ class LFGQueue
 		// Returns the number of players in the queue.
 		int size();
 
-		// Adds a (pointer to a) player to the back of the queue
+		// Adds a (pointer to a) player to the back of the queue.
 		void push_player(Player* p);
 
 		// Returns a pointer to the frontmost player 
 		// with the specified role. If no such player 
-		// exists, returns 0.
+		// exists, returns nullptr.
 		Player* front_player(Player::Role r);
 
 		// Removes the frontmost player with the

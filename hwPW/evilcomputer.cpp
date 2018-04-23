@@ -10,7 +10,7 @@ EvilComputer :: EvilComputer(string dave_pw, string mr_mean_pw, string ms_chief_
 {
 	for (int i = 0; i < 5; ++i)
 		hacked[i] = false;
-	passwords[index("Guest")] = "password123";
+	passwords[index("Guest")] = "passw123";
 	passwords[index("Dave")] = dave_pw;
 	passwords[index("Mr. Mean")] = mr_mean_pw;
 	passwords[index("Ms. Chief")] = ms_chief_pw;
@@ -22,7 +22,7 @@ EvilComputer :: EvilComputer()
 	for (int i = 0; i < 5; ++i)
 		hacked[i] = false;
 	
-	passwords[index("Guest")] = "password123";
+	passwords[index("Guest")] = "passw123";
 
 	string password;
 	int length;
@@ -70,16 +70,14 @@ char EvilComputer :: random_char()
 	return c;
 }
 
-bool EvilComputer :: guess(string user, string guess)
+void EvilComputer :: guess(string user, string guess)
 {
 	int user_index = index(user);
 	if (user_index == -1)
-		return false;
+		return;
 
-	if (guess != passwords[user_index])
-                return false;
-        hacked[user_index] = true;
-        return true;
+	if (guess == passwords[user_index])
+		hacked[user_index] = true;
 }
 
 bool EvilComputer :: is_hacked(string user)

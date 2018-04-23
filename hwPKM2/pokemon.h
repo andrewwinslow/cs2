@@ -13,13 +13,20 @@ class Pokemon
 		enum Type {Normal, Fighting, Flying, Poison};
 
 
-		// A summary string is a single string that contains all of a Pokemon's information.
-		// A Pokemon with one type and Ndex 1 has a summary string of the form:
+		// A summary string is a single string that contains 
+		// all of a Pokemon's information.
+		// 
+		// A Pokemon with one type and Ndex 1 has 
+		// a summary string of the form:
 		// "Name, #001, type1,"
-		// Similarly, a Pokemon with two types and Ndex 2 has a summary string of the form:
+		// 
+		// Similarly, a Pokemon with two types and Ndex 2 has 
+		// a summary string of the form:
 		// "Name, #002, type1, type2," 
 		
 		// Initializes a Pokemon from a summary string
+		//
+		// Hint: check out the stoi function in <string>
 		Pokemon(string summary);
 
 		// Returns the summary string of the Pokemon

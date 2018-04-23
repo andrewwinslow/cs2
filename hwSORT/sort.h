@@ -2,7 +2,8 @@
 #ifndef SORT_H
 #define SORT_H
 
-void sort(int* A, int len);
+// Sorts the input array of A of length n.
+void sort(int* A, int n);
 
 #endif
 

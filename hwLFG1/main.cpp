@@ -33,21 +33,21 @@ int main()
 	// on a small example.
 	LFGQueue q;
 	test(q.size() == 0);
-	test(q.front_player(Player::Defender) == 0);
-	test(q.front_player(Player::Hunter) == 0);
-	test(q.front_player(Player::Bard) == 0);
+	test(q.front_player(Player::Defender) == nullptr);
+	test(q.front_player(Player::Hunter) == nullptr);
+	test(q.front_player(Player::Bard) == nullptr);
 
 	q.push_player(&daniela);
 	test(q.size() == 1);
 	test(q.front_player(Player::Defender) == &daniela);
-	test(q.front_player(Player::Hunter) == 0);
-	test(q.front_player(Player::Bard) == 0);
+	test(q.front_player(Player::Hunter) == nullptr);
+	test(q.front_player(Player::Bard) == nullptr);
 
 	q.push_player(&hector);
 	test(q.size() == 2);
 	test(q.front_player(Player::Defender) == &daniela);
 	test(q.front_player(Player::Hunter) == &hector);
-	test(q.front_player(Player::Bard) == 0);
+	test(q.front_player(Player::Bard) == nullptr);
 
 	q.push_player(&berta);
 	test(q.size() == 3);
@@ -97,47 +97,46 @@ int main()
 	test(q.size() == 2);
 	test(q.front_player(Player::Defender) == &daria);
 	test(q.front_player(Player::Hunter) == &hugo);
-	test(q.front_player(Player::Bard) == 0);
+	test(q.front_player(Player::Bard) == nullptr);
 
 	q.pop_player(Player::Defender);
 	test(q.size() == 1);
-	test(q.front_player(Player::Defender) == 0);
+	test(q.front_player(Player::Defender) == nullptr);
 	test(q.front_player(Player::Hunter) == &hugo);
-	test(q.front_player(Player::Bard) == 0);
+	test(q.front_player(Player::Bard) == nullptr);
 
 	q.pop_player(Player::Hunter);
 	test(q.size() == 0);
-	test(q.front_player(Player::Defender) == 0);
-	test(q.front_player(Player::Hunter) == 0);
-	test(q.front_player(Player::Bard) == 0);
+	test(q.front_player(Player::Defender) == nullptr);
+	test(q.front_player(Player::Hunter) == nullptr);
+	test(q.front_player(Player::Bard) == nullptr);
 
 	
-	// Test previous methods plus front_group(), pop_group() on 
-	// a small example.
+	// Test previous methods plus front_group(), pop_group() on a small example.
 	q.push_player(&hugo);
 	test(q.size() == 1);
-	test(q.front_player(Player::Defender) == 0);
+	test(q.front_player(Player::Defender) == nullptr);
 	test(q.front_player(Player::Hunter) == &hugo);
-	test(q.front_player(Player::Bard) == 0);
+	test(q.front_player(Player::Bard) == nullptr);
 	test(!q.front_group(group));
 
 	q.push_player(&hector);
 	test(q.size() == 2);
-	test(q.front_player(Player::Defender) == 0);
+	test(q.front_player(Player::Defender) == nullptr);
 	test(q.front_player(Player::Hunter) == &hugo);
-	test(q.front_player(Player::Bard) == 0);
+	test(q.front_player(Player::Bard) == nullptr);
 	test(!q.front_group(group));
 
 	q.push_player(&berta);
 	test(q.size() == 3);
-	test(q.front_player(Player::Defender) == 0);
+	test(q.front_player(Player::Defender) == nullptr);
 	test(q.front_player(Player::Hunter) == &hugo);
 	test(q.front_player(Player::Bard) == &berta);
 	test(!q.front_group(group));
 
 	q.push_player(&bernardo);
 	test(q.size() == 4);
-	test(q.front_player(Player::Defender) == 0);
+	test(q.front_player(Player::Defender) == nullptr);
 	test(q.front_player(Player::Hunter) == &hugo);
 	test(q.front_player(Player::Bard) == &berta);
 	test(!q.front_group(group));
@@ -158,7 +157,7 @@ int main()
 
 	// Order is now [Hugo, Hector, Berta, Bernardo, Daria, Daniela]
 
-	group[0] = group[1] = group[2] = 0;
+	group[0] = group[1] = group[2] = nullptr;
 	test(q.front_group(group));
 	test(group[0] == &daria);
 	test(group[1] == &hugo);
@@ -170,7 +169,7 @@ int main()
 	test(q.front_player(Player::Hunter) == &hector);
 	test(q.front_player(Player::Bard) == &bernardo);
 
-	group[0] = group[1] = group[2] = 0;
+	group[0] = group[1] = group[2] = nullptr;
 	test(q.front_group(group));
 	test(group[0] == &daniela);
 	test(group[1] == &hector);
@@ -178,9 +177,9 @@ int main()
 
 	q.pop_group();
 	test(q.size() == 0);
-	test(q.front_player(Player::Defender) == 0);
-	test(q.front_player(Player::Hunter) == 0);
-	test(q.front_player(Player::Bard) == 0);
+	test(q.front_player(Player::Defender) == nullptr);
+	test(q.front_player(Player::Hunter) == nullptr);
+	test(q.front_player(Player::Bard) == nullptr);
 	
 
 	// Test a set of 999 players: 333 of each role in the following order:
@@ -217,7 +216,7 @@ int main()
 	// Because of how we scrambled, this has a fixed order.
 	for (int i = 0; i < 333; ++i)
 	{
-		group[0] = group[1] = group[2] = 0;
+		group[0] = group[1] = group[2] = nullptr;
 		test(q.front_group(group));	
 
 		oss.str("");
