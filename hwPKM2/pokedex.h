@@ -3,6 +3,8 @@
 #define POKEDEX_H
 
 #include <string>
+#include <cassert>
+#include <fstream>
 #include "pokemon.h"
 
 using namespace std;

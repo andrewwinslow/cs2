@@ -120,12 +120,24 @@ int main()
 	test(q.front_player(Player::Bard) == nullptr);
 	test(!q.front_group(group));
 
+	q.pop_group();
+	test(q.size() == 1);
+	test(q.front_player(Player::Defender) == nullptr);
+	test(q.front_player(Player::Hunter) == &hugo);
+	test(q.front_player(Player::Bard) == nullptr);
+
 	q.push_player(&hector);
 	test(q.size() == 2);
 	test(q.front_player(Player::Defender) == nullptr);
 	test(q.front_player(Player::Hunter) == &hugo);
 	test(q.front_player(Player::Bard) == nullptr);
 	test(!q.front_group(group));
+
+	q.pop_group();
+	test(q.size() == 2);
+	test(q.front_player(Player::Defender) == nullptr);
+	test(q.front_player(Player::Hunter) == &hugo);
+	test(q.front_player(Player::Bard) == nullptr);
 
 	q.push_player(&berta);
 	test(q.size() == 3);
@@ -134,12 +146,24 @@ int main()
 	test(q.front_player(Player::Bard) == &berta);
 	test(!q.front_group(group));
 
+	q.pop_group();
+	test(q.size() == 3);
+	test(q.front_player(Player::Defender) == nullptr);
+	test(q.front_player(Player::Hunter) == &hugo);
+	test(q.front_player(Player::Bard) == &berta);
+
 	q.push_player(&bernardo);
 	test(q.size() == 4);
 	test(q.front_player(Player::Defender) == nullptr);
 	test(q.front_player(Player::Hunter) == &hugo);
 	test(q.front_player(Player::Bard) == &berta);
 	test(!q.front_group(group));
+
+	q.pop_group();
+	test(q.size() == 4);
+	test(q.front_player(Player::Defender) == nullptr);
+	test(q.front_player(Player::Hunter) == &hugo);
+	test(q.front_player(Player::Bard) == &berta);
 
 	q.push_player(&daria);
 	test(q.size() == 5);

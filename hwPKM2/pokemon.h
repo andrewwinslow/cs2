@@ -3,6 +3,7 @@
 #define POKEMON_H
 
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -30,6 +31,8 @@ class Pokemon
 		Pokemon(string summary);
 
 		// Returns the summary string of the Pokemon
+		//
+		// Hint: check out the ostringstream class in <sstream>
 		string summary();
 
 

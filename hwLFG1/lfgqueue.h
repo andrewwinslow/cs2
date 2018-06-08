@@ -13,17 +13,16 @@ class LFGQueue
 		// Returns the number of players in the queue.
 		int size();
 
-		// Adds a (pointer to a) player to the back of the queue.
+		// Pushes a pointer to a player onto the back of the queue.
 		void push_player(Player* p);
 
 		// Returns a pointer to the frontmost player 
-		// with the specified role. If no such player 
-		// exists, returns nullptr.
+		// with the specified role. 
+		// If no such player exists, returns nullptr.
 		Player* front_player(Player::Role r);
 
-		// Removes the frontmost player with the
-		// specified role. If no such player exists
-		// does nothing.
+		// Removes the frontmost player with the specified role. 
+		// If no such player exists, does nothing.
 		void pop_player(Player::Role r);	
 
 		// Returns whether the queue contains a complete group
@@ -37,10 +36,9 @@ class LFGQueue
 		// 3. Bard (index 2)
 		bool front_group(Player** group);
 
-		// Removes the frontmost Defender, Hunter, 
-		// and Bard from the queue. If some role
-		// has no player with that role, then
-		// no players are removed.
+		// Removes the frontmost Defender, Hunter, and Bard 
+		// from the queue. If some role has no player with that role, 
+		// then does nothing.
 		void pop_group();
 
 	private:

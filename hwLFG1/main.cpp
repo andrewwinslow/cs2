@@ -120,12 +120,24 @@ int main()
 	test(q.front_player(Player::Bard) == nullptr);
 	test(!q.front_group(group));
 
+	q.pop_group();
+	test(q.size() == 1);
+	test(q.front_player(Player::Defender) == nullptr);
+	test(q.front_player(Player::Hunter) == &hugo);
+	test(q.front_player(Player::Bard) == nullptr);
+
 	q.push_player(&hector);
 	test(q.size() == 2);
 	test(q.front_player(Player::Defender) == nullptr);
 	test(q.front_player(Player::Hunter) == &hugo);
 	test(q.front_player(Player::Bard) == nullptr);
 	test(!q.front_group(group));
+
+	q.pop_group();
+	test(q.size() == 2);
+	test(q.front_player(Player::Defender) == nullptr);
+	test(q.front_player(Player::Hunter) == &hugo);
+	test(q.front_player(Player::Bard) == nullptr);
 
 	q.push_player(&berta);
 	test(q.size() == 3);
@@ -134,12 +146,24 @@ int main()
 	test(q.front_player(Player::Bard) == &berta);
 	test(!q.front_group(group));
 
+	q.pop_group();
+	test(q.size() == 3);
+	test(q.front_player(Player::Defender) == nullptr);
+	test(q.front_player(Player::Hunter) == &hugo);
+	test(q.front_player(Player::Bard) == &berta);
+
 	q.push_player(&bernardo);
 	test(q.size() == 4);
 	test(q.front_player(Player::Defender) == nullptr);
 	test(q.front_player(Player::Hunter) == &hugo);
 	test(q.front_player(Player::Bard) == &berta);
 	test(!q.front_group(group));
+
+	q.pop_group();
+	test(q.size() == 4);
+	test(q.front_player(Player::Defender) == nullptr);
+	test(q.front_player(Player::Hunter) == &hugo);
+	test(q.front_player(Player::Bard) == &berta);
 
 	q.push_player(&daria);
 	test(q.size() == 5);
@@ -191,19 +215,19 @@ int main()
 	for (int i = 0; i < 333; ++i)
 	{
 		oss.str("");
-		oss << "Defender " << i+1;
+		oss << "Defender #" << i+1;
 		players[i] = new Player(oss.str(), Player::Defender);
 	}
 	for (int i = 333; i < 999; i+=2)
 	{
 		oss.str("");
-		oss << "Hunter " << (i-333)/2+1;
+		oss << "Hunter #" << (i-333)/2+1;
 		players[i] = new Player(oss.str(), Player::Hunter);
 	}
 	for (int i = 334; i < 999; i+=2)
 	{
 		oss.str("");
-		oss << "Bard " << (i-334)/2+1;
+		oss << "Bard #" << (i-334)/2+1;
 		players[i] = new Player(oss.str(), Player::Bard);
 	}
 		
@@ -220,15 +244,15 @@ int main()
 		test(q.front_group(group));	
 
 		oss.str("");
-		oss << "Defender " << i+1;
+		oss << "Defender #" << i+1;
 		test(group[0]->name() == oss.str());
 
 		oss.str("");
-		oss << "Hunter " << i+1;
+		oss << "Hunter #" << i+1;
 		test(group[1]->name() == oss.str());
 
 		oss.str("");
-		oss << "Bard " << i+1;
+		oss << "Bard #" << i+1;
 		test(group[2]->name() == oss.str());
 
 		q.pop_group();
