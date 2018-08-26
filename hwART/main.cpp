@@ -24,26 +24,11 @@ void interactive_mode(char ink)
 	{
 		string line;
 		getline(cin, line);
-		string invalid_chars;
-		for (int i = 0; i < line.size(); ++i)
-			if (line[i] < 'A' || line[i] > 'D')
-				invalid_chars += line[i];
-		if (invalid_chars.size() > 0)
-		{
-			cout << "    String contained invalid chars: ";
-			for (int i = 0; i < invalid_chars.size(); ++i)
-			{
-				cout << "'" << invalid_chars[i] << "'";
-				if (i != invalid_chars.size() - 1)
-					cout << ", ";
-			}
-			cout << "." << endl;
-		}
-		else if (line.size() > 0)
+		if (line.size() > 0)
 		{
 			Canvas C(line);
 			C.replace('#', ink);
-			cout << C.to_string();
+			cout << C.str();
 		}
 	}
 
@@ -59,187 +44,153 @@ int main()
 	// 
 	// The parameter specifies the character used to fill letters.
 	// 
-	// interactive_mode('@');
-
-
-	// Test Canvas(int)
-	Canvas C1(3);
-	test(C1.width() == 3);
-	test(C1.to_string() == string("   \n") 
-	                            + "   \n"
-	                            + "   \n"
-	                            + "   \n"
-	                            + "   \n");
-	Canvas C2(4);
-	test(C2.width() == 4);
-	test(C2.to_string() == string("    \n")
-	                            + "    \n"
-	                            + "    \n"
-	                            + "    \n"
-	                            + "    \n");
-	Canvas C3(7);
-	test(C3.width() == 7);
-	test(C3.to_string() == string("       \n")
-	                            + "       \n"
-	                            + "       \n"
-	                            + "       \n"
-	                            + "       \n");
+	//interactive_mode('@');
 
 
 	// Test Canvas(char)
-	Canvas C4('A');
-	test(C4.width() == 5);
-	test(C4.to_string() == string(" ### \n")
-	                            + "#   #\n"
-	                            + "#####\n"
-	                            + "#   #\n"
-	                            + "#   #\n");
-	Canvas C5('B');
-	test(C5.width() == 5);
-	test(C5.to_string() == string("#### \n")
-	                            + "#   #\n"
-	                            + "#### \n"
-	                            + "#   #\n"
-	                            + "#### \n");
-	Canvas C6('C');
-	test(C6.width() == 5);
-	test(C6.to_string() == string(" ####\n")
-	                            + "#    \n"
-	                            + "#    \n"
-	                            + "#    \n"
-	                            + " ####\n");
-	Canvas C7('D');
-	test(C7.width() == 5);
-	test(C7.to_string() == string("#### \n")
-	                            + "#   #\n"
-	                            + "#   #\n"
-	                            + "#   #\n"
-	                            + "#### \n");
-	Canvas C8('E');
-	test(C8.width() == 5);
-	test(C8.to_string() == string("     \n")
-	                            + "     \n"
-	                            + "     \n"
-	                            + "     \n"
-	                            + "     \n");
+	Canvas C1('A');
+	test(C1.str() == string(" ### \n")
+                              + "#   #\n"
+                              + "#####\n"
+                              + "#   #\n"
+                              + "#   #\n");
+	Canvas C2('B');
+	test(C2.str() == string("#### \n")
+                              + "#   #\n"
+                              + "#### \n"
+                              + "#   #\n"
+                              + "#### \n");
+	Canvas C3('C');
+	test(C3.str() == string(" ####\n")
+                              + "#    \n"
+                              + "#    \n"
+                              + "#    \n"
+                              + " ####\n");
+	Canvas C4('X');
+	test(C4.str() == string("#   #\n")
+                              + " # # \n"
+                              + "  #  \n"
+                              + " # # \n"
+                              + "#   #\n");
+	Canvas C5('Y');
+	test(C5.str() == string("#   #\n")
+                              + " # # \n"
+                              + "  #  \n"
+                              + "  #  \n"
+                              + "  #  \n");
+	Canvas C6('Z');
+	test(C6.str() == string("#####\n")
+                              + "   # \n"
+                              + "  #  \n"
+                              + " #   \n"
+                              + "#####\n");
+	Canvas C7('!');
+	test(C7.str() == string("     \n")
+                              + "     \n"
+                              + "     \n"
+                              + "     \n"
+                              + "     \n");
 
 
 	// Test replace()
-	C5.replace('#', '@');
-	test(C5.width() == 5);
-	test(C5.to_string() == string("@@@@ \n")
-	                            + "@   @\n"
-	                            + "@@@@ \n"
-	                            + "@   @\n"
-	                            + "@@@@ \n");
-	C5.replace(' ', '-');
-	test(C5.width() == 5);
-	test(C5.to_string() == string("@@@@-\n")
-	                            + "@---@\n"
-	                            + "@@@@-\n"
-	                            + "@---@\n"
-	                            + "@@@@-\n");
-	C5.replace('-', '@');
-	test(C5.width() == 5);
-	test(C5.to_string() == string("@@@@@\n")
-	                            + "@@@@@\n"
-	                            + "@@@@@\n"
-	                            + "@@@@@\n"
-	                            + "@@@@@\n");
-	C5.replace('@', '$');
-	test(C5.width() == 5);
-	test(C5.to_string() == string("$$$$$\n")
-	                            + "$$$$$\n"
-	                            + "$$$$$\n"
-	                            + "$$$$$\n"
-	                            + "$$$$$\n");
-	C6.replace(' ', '*');
-	test(C6.width() == 5);
-	test(C6.to_string() == string("*####\n")
-	                            + "#****\n"
-	                            + "#****\n"
-	                            + "#****\n"
-	                            + "*####\n");
-	C7.replace('#', '*');
-	test(C7.width() == 5);
-	test(C7.to_string() == string("**** \n")
-	                            + "*   *\n"
-	                            + "*   *\n"
-	                            + "*   *\n"
-	                            + "**** \n");
+        Canvas C8('D');
+	C8.replace('#', '@');
+	test(C8.str() == string("@@@@ \n")
+                              + "@   @\n"
+                              + "@   @\n"
+                              + "@   @\n"
+                              + "@@@@ \n");
+	C8.replace(' ', '-');
+	test(C8.str() == string("@@@@-\n")
+                              + "@---@\n"
+                              + "@---@\n"
+                              + "@---@\n"
+                              + "@@@@-\n");
+	C8.replace('@', '-');
+	test(C8.str() == string("-----\n")
+                              + "-----\n"
+                              + "-----\n"
+                              + "-----\n"
+                              + "-----\n");
+	C8.replace('-', '#');
+	test(C8.str() == string("#####\n")
+                              + "#####\n"
+                              + "#####\n"
+                              + "#####\n"
+                              + "#####\n");
 	C8.replace('#', ' ');
-	test(C8.width() == 5);
-	test(C8.to_string() == string("     \n")
-	                            + "     \n"
-	                            + "     \n"
-	                            + "     \n"
-	                            + "     \n");
-
-
-	// Test add()	
-	Canvas C9('A');
-	C9.add('C');
-	test(C9.width() == 12);	
-	test(C9.to_string() == string(" ###    ####\n")
-	                             + "#   #  #    \n"
-	                             + "#####  #    \n"
-	                             + "#   #  #    \n"
-	                             + "#   #   ####\n");
-	C9.add('B');
-	test(C9.width() == 19);	
-	test(C9.to_string() == string(" ###    ####  #### \n")
-	                            + "#   #  #      #   #\n"
-	                            + "#####  #      #### \n"
-	                            + "#   #  #      #   #\n"
-	                            + "#   #   ####  #### \n");
-	C9.add('D');
-	test(C9.width() == 26);	
-	test(C9.to_string() == string(" ###    ####  ####   #### \n")
-	                            + "#   #  #      #   #  #   #\n"
-	                            + "#####  #      ####   #   #\n"
-	                            + "#   #  #      #   #  #   #\n"
-	                            + "#   #   ####  ####   #### \n");
-	C9.add('!');
-	test(C9.width() == 33);	
-	test(C9.to_string() == string(" ###    ####  ####   ####        \n")
-	                            + "#   #  #      #   #  #   #       \n"
-	                            + "#####  #      ####   #   #       \n"
-	                            + "#   #  #      #   #  #   #       \n"
-	                            + "#   #   ####  ####   ####        \n");
-	C9.add('C');
-	test(C9.width() == 40);	
-	test(C9.to_string() == string(" ###    ####  ####   ####           ####\n")
-	                            + "#   #  #      #   #  #   #         #    \n"
-	                            + "#####  #      ####   #   #         #    \n"
-	                            + "#   #  #      #   #  #   #         #    \n"
-	                            + "#   #   ####  ####   ####           ####\n");
+	test(C8.str() == string("     \n")
+                              + "     \n"
+                              + "     \n"
+                              + "     \n"
+                              + "     \n");
 
 	
 	// Test Canvas(string)
-	Canvas C10("ADD");
-	test(C10.width() == 19);	
-	test(C10.to_string() == string(" ###   ####   #### \n")
-	                             + "#   #  #   #  #   #\n"
-	                             + "#####  #   #  #   #\n"
-	                             + "#   #  #   #  #   #\n"
-	                             + "#   #  ####   #### \n");
-	Canvas C11("VBAD!");
-	test(C11.width() == 33);	
-	test(C11.to_string() == string("       ####    ###   ####        \n")
-	                             + "       #   #  #   #  #   #       \n"
-	                             + "       ####   #####  #   #       \n"
-	                             + "       #   #  #   #  #   #       \n"
-	                             + "       ####   #   #  ####        \n");
-	Canvas C12("DAD CAB");
-	test(C12.width() == 47);	
-	test(C12.to_string() == string("####    ###   ####           ####   ###   #### \n")
-	                             + "#   #  #   #  #   #         #      #   #  #   #\n"
-	                             + "#   #  #####  #   #         #      #####  #### \n"
-	                             + "#   #  #   #  #   #         #      #   #  #   #\n"
-	                             + "####   #   #  ####           ####  #   #  #### \n");
+	Canvas C9("ABC");
+	test(C9.str() == string(" ###   ####    ####\n")
+                              + "#   #  #   #  #    \n"
+                              + "#####  ####   #    \n"
+                              + "#   #  #   #  #    \n"
+                              + "#   #  ####    ####\n");
+	Canvas C10("DEF");
+	test(C10.str() == string("####   #####  #####\n")
+                               + "#   #  #      #    \n"
+                               + "#   #  #####  #####\n"
+                               + "#   #  #      #    \n"
+                               + "####   #####  #    \n");
+	Canvas C11("HELLO");
+	test(C11.str() == string("#   #  #####  #      #       ### \n")
+                               + "#   #  #      #      #      #   #\n"
+                               + "#####  #####  #      #      #   #\n"
+                               + "#   #  #      #      #      #   #\n"
+                               + "#   #  #####  #####  #####   ### \n");
+	Canvas C12("T$U!V#");
+	test(C12.str() == string("#####         #   #         #   #       \n")
+                               + "  #           #   #         #   #       \n"
+                               + "  #           #   #         #   #       \n"
+                               + "  #           #   #          # #        \n"
+                               + "  #            ###            #         \n");
+	Canvas C13("ASCII");
+	test(C13.str() == string(" ###    ####   ####  #####  #####\n")
+                               + "#   #  #      #        #      #  \n"
+                               + "#####   ###   #        #      #  \n"
+                               + "#   #      #  #        #      #  \n"
+                               + "#   #  ####    ####  #####  #####\n");
 
 
-	cout << "Assignment complete." << endl;
+        // Test reflect()
+        Canvas C14('B');
+        C14.reflect();
+	test(C14.str() == string(" ####\n")
+                               + "#   #\n"
+                               + " ####\n"
+                               + "#   #\n"
+                               + " ####\n");
+        Canvas C15('N');
+        C15.reflect(); 
+	test(C15.str() == string("#   #\n")
+                               + "#  ##\n"
+                               + "# # #\n"
+                               + "##  #\n"
+                               + "#   #\n");
+        Canvas C16("XYZ");
+        C16.reflect(); 
+	test(C16.str() == string("#####  #   #  #   #\n")
+	                       + " #      # #    # # \n"
+	                       + "  #      #      #  \n"
+	                       + "   #     #     # # \n"
+	                       + "#####    #    #   #\n");
+	Canvas C17("MIRROR");
+        C17.reflect();
+	test(C17.str() == string(" ####   ###    ####   ####  #####  #   #\n")
+	                       + "#   #  #   #  #   #  #   #    #    ## ##\n"
+	                       + " ####  #   #   ####   ####    #    # # #\n"
+                               + " #  #  #   #   #  #   #  #    #    #   #\n"
+                               + "#   #   ###   #   #  #   #  #####  #   #\n");
+
+	
+        cout << "Assignment complete." << endl;
 }
 
 

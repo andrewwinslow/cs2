@@ -11,7 +11,7 @@ class Pokemon
 {
 	public:
 		// Same as hwPKM1
-		enum Type {Normal, Fighting, Flying, Poison};
+		enum PokeType {Normal, Fighting, Flying, Poison};
 
 
 		// A summary string is a single string that contains 
@@ -37,33 +37,34 @@ class Pokemon
 
 
 		// Same as hwPKM1
-		Pokemon(string name, int ndex, Type type1);
-		Pokemon(string name, int ndex, Type type1, Type type2);
+		Pokemon(string name, int ndex, PokeType type1);
+		Pokemon(string name, int ndex, PokeType type1, PokeType type2);
 		string name();
 		int Ndex();
-		Type type1();
+		PokeType type1();
 		bool is_multitype();
-		Type type2();
-		float damage_multiplier(Type attack_type);
+		PokeType type2();
+		float damage_multiplier(PokeType attack_type);
 
 	private:
-		int _ndex;       // Stores the Pokemon's Ndex
-		string _name;    // Stores the Pokemon's name 
-		Type types[2];   // Stores the Pokemon's types (1 or 2 of them)
-		int type_count;  // Stores how many types the Pokemon has
+                // Same as hwPKM1
+		int _ndex;       
+		string _name;    
+		PokeType types[2];
+		int type_count;    
 };
 
 // Returns a string corresponding to the type. Examples:
 // 1. type_to_string(Pokemon::Poison) returns "Poison".
 // 2. type_to_string(Pokemon::Normal) returns "Normal". 
-string type_to_string(Pokemon::Type t);
+string type_to_string(Pokemon::PokeType t);
 
 // Returns the type corresponding to a string. Examples:
 // 1. string_to_type("Poison") returns Pokemon::Poison.
 // 2. string_to_type("Normal") returns Pokemon::Normal.
 // 3. Allowed to return anything if given string doesn't 
 //    correspond to a Pokemon type.
-Pokemon::Type string_to_type(string s);
+Pokemon::PokeType string_to_type(string s);
 
 #endif
 

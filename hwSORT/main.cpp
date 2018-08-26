@@ -65,7 +65,7 @@ void benchmark_sort(int* A, int n)
 
 int main()
 {
-	srand(2017); // Initializes random number generation
+	srand(2018 + 's'); // Initializes random number generation
 	system_clock::time_point start, end;
 	float dur;
 
@@ -79,8 +79,11 @@ int main()
 
 
 	// Test 1: already in sorted order
+        A[0] = 1;
+	for (int i = 1; i < n; ++i)
+		A[i] = A[i-1] + (rand() % 5); 
 	for (int i = 0; i < n; ++i)
-		A[i] = B[i] = i+1; 
+		B[i] = A[i];
 
 	start = system_clock::now();
 	sort(A, n);
@@ -101,8 +104,9 @@ int main()
 
 
 	// Test 2: reverse sorted order
-	for (int i = 0; i < n; ++i)
-		A[i] = n-i; 
+        A[0] = n + (rand() % n);
+	for (int i = 1; i < n; ++i)
+		A[i] = A[i-1] - (rand() % 5);
 	for (int i = 0; i < n; ++i)
 		B[i] = A[i];
 
@@ -125,10 +129,15 @@ int main()
 		
 
 	// Test 3: in "mostly" sorted order
+        A[0] = 1;
 	for (int i = 0; i < n; ++i)
-		A[i] = i+1; 
+		A[i] = A[i-1] + (rand() % 5); 
 	for (int i = 0; i < 10000; ++i)
-		swap(A[rand() % n], A[rand() % n]);
+        {
+                int index1 = (rand() % (n - 50));
+                int index2 = index1 + (rand() % 30);
+		swap(A[index1], A[index2]);
+        }
 	for (int i = 0; i < n; ++i)
 		B[i] = A[i];
 

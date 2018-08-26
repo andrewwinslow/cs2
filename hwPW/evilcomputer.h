@@ -16,11 +16,10 @@ class EvilComputer
 		// Creates a new evil computer with specific passwords.
 		EvilComputer(string dave_pw, string mr_mean_pw, string ms_chief_pw, string dr_evil_pw);
 
-		// Guess a password for an agent.
-		// Returns whether the password guessed is correct.
+		// Guess a password for a user.
 		void guess(string user, string guess);
 
-		// Returns whether an agent's password has been correctly guessed.
+		// Returns whether a user's password has been correctly guessed.
 		bool is_hacked(string user);
 
 	private:

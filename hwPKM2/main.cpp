@@ -22,7 +22,6 @@ int main()
 {
 	// ***** Test Pokemon *****
 
-
 	// Test type_to_string()
 	test(type_to_string(Pokemon::Normal) == "Normal");
 	test(type_to_string(Pokemon::Fighting) == "Fighting");
