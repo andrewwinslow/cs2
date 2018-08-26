@@ -21,7 +21,7 @@ When the course is running, it can be seen at [http://andrewwinslow.com/2380/](h
 7. Recursion: hwPW
 8. Searching & Sorting: hwAC1, hwSORT
 9. C++ STL: hwLOG
-10. Tree-Based Data Structures: hwAC2, hwAC3 
+10. Tree-Based Data Structures: hwAC2 
 
 # Considerations
 The format and design of these assignments emphasizes several ideas:
@@ -35,6 +35,6 @@ Many of the assignments are organized into thematic groups based on an applicati
 * hwHIST1, hwHIST2: Browser history.
 * hwLFG1, hwLFG2: Team matchmaking in a role-based game.
 * hwPW: Brute-force password cracking.
-* hwAC1, hwAC2, hwAC3: The autocomplete feature found in many UIs. 
+* hwAC1, hwAC2: The autocomplete feature found in many keyboard UIs. 
 
 
